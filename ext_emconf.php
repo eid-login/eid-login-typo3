@@ -3,7 +3,7 @@
 // general config of the extension to be read my extension manager / repository
 $EM_CONF[$_EXTKEY] = [
     'title' => 'eID-Login',
-    'description' => 'Integration of mobile electronic identities at a substantial security level',
+    'description' => 'The eID-Login extension for TYPO3 allows to use the German eID-card and similar electronic identity documents for secure and privacy-friendly Website-User login. For this purpose, a so-called eID-Client, such as the AusweisApp2 or the Open eCard App and a eID-Service are required. In the default configuration a suitable eID-Service is provided without any additional costs.',
     'category' => 'plugin',
     'author' => 'ecsec GmbH',
     'author_company' => 'ecsec GmbH',
