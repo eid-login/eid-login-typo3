@@ -1,9 +1,7 @@
 {
     "name": "eid-login/eid-login-typo3",
     "description": "The eID-Login extension for TYPO3 allows to use the German eID-card and similar electronic identity documents for secure and privacy-friendly Website-User login. For this purpose, a so-called eID-Client, such as the AusweisApp2 or the Open eCard App and a eID-Service are required. In the default configuration a suitable eID-Service is provided without any additional costs.",
-    "keywords": [
-        "eID, saml, saml2, auth, authentication, sso, login"
-    ],
+    "keywords": [ "eID", "saml", "saml2", "auth", "authentication", "sso", "login" ],
     "homepage": "https://github.com/eid-login/eid-login-typo3",
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
