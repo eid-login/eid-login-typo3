@@ -1,7 +1,7 @@
 !.gitkeep
 .env
 .php_cs.cache
-eidlogin.zip
+eidlogin*.zip
 public
 Tests/_output/
 vendor
