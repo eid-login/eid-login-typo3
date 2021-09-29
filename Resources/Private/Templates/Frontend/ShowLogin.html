@@ -1,0 +1,37 @@
+<f:flashMessages />
+<f:if condition="{activated}==1">
+    <f:then>
+            <f:security.ifAuthenticated>
+              <f:then>
+                <div id="eidlogin-login-authenticated" {f:if(condition:'{settings.classesLoginAuthenticated}!=\'\'', then: 'class="{settings.classesLoginAuthenticated}"')}>
+                  <div id="eidlogin-login-logout" {f:if(condition:'{settings.classesLoginLogout}!=\'\'', then: 'class="{settings.classesLoginLogout}"')}>
+                    <a href="{f:uri.action(action: 'logout')}">
+                      <f:translate key="fe_tpl_login_logout"/>
+                    </a>
+                  </div>
+                </div>
+              </f:then>
+              <f:else>
+                <div id="eidlogin-login-unauthenticated" {f:if(condition:'{settings.classesLoginUnauthenticated}!=\'\'', then: 'class="{settings.classesLoginUnauthenticated}"')}>
+                  <div id="eidlogin-login-logo" {f:if(condition:'{settings.classesLoginLogo}!=\'\'', then: 'class="{settings.classesLoginLogo}"')}>
+                    <a href="{f:uri.action(action: 'startLogin', arguments:{redirect: redirect_url})}">
+                      <f:image src="EXT:eidlogin/Resources/Public/Images/npa.png" alt="npa" />
+                    </a>
+                  </div>
+                  <div id="eidlogin-login-login" {f:if(condition:'{settings.classesLoginLogin}!=\'\'', then: 'class="{settings.classesLoginLogin}"')}>
+                    <a href="{f:uri.action(action: 'startLogin', arguments:{redirect: redirect_url})}">
+                      <f:translate key="fe_tpl_login_login"/>
+                    </a>
+                  </div>
+                  <div id="eidlogin-login-faq" {f:if(condition:'{settings.classesLoginFaq}!=\'\'', then: 'class="{settings.classesLoginFaq}"')}>
+                    <a target="_blank" href="{url_faq}">
+                      ?
+                    </a>
+                  </div>
+                </div>
+              </f:else>
+            </f:security.ifAuthenticated>
+        </div>
+    </f:then>
+</f:if>
+

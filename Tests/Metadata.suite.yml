@@ -1,0 +1,12 @@
+actor: MetadataTester
+modules:
+    enabled:
+        # we use Acceptance module also for this suite
+        - \Helper\Acceptance
+        # for running shell commands
+        - Cli
+        # for special asserte when checking xml response
+        - Asserts
+        # for doing http requests
+        - PhpBrowser:
+            url: https://typo3.p396.de

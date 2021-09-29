@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+<file source-language="en" target-language="de" datatype="plaintext" original="EXT:eidlogin/Resources/Private/Language/locallang_mod.xlf" date="2015-07-30T00:30:29Z"
+      product-name="eidlogin">
+    <header/>
+    <body>
+        <!-- be menu -->
+        <trans-unit id="mlang_tabs_tab" xml:space="preserve">
+            <source>eID-Login</source>
+        </trans-unit>
+        <trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
+            <source>eID-Login Einstellungen</source>
+        </trans-unit>
+        <trans-unit id="mlang_labels_tablabel" xml:space="preserve">
+            <source>eID-Login</source>
+        </trans-unit>
+        <!-- be templates -->
+        <trans-unit id="be_tpl_intro">
+            <source>Intro</source>
+            <target>Einstieg</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_notls">
+            <source>To use the eID-Login extension, your TYPO3 instance must use TLS!</source>
+            <target>Um die eID-Login Erweiterung zu nutzen, muss Ihre TYPO3 Instanz mit TLS betrieben werden!</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_missingtask">
+            <source>To use the eID-Login extension, please set up the scheduler tasks as described in the extensions readme!</source>
+            <target>Um die eID-Login Erweiterung zu nutzen, erstellen Sie bitte die Planer Tasks wie in der Readme Datei der Erweiterung beschreiben!</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_missingdefaultmailfromaddress">
+            <source>To use the eID-Login extension, please configure the default email address which is used when no other "from" address is set for a TYPO3-generated email in the TYPO3 settings!</source>
+            <target>Um die eID-Login Erweiterung zu nutzen, konfigurieren sie bitte die E-Mail Adresse in den TYPO3 Einstellungen, welche verwendet wird, wenn keine andere "von" Adresse für TYPO3-generierte E-Mails gesetzt ist!</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_1">
+            <source>The eID-Login extension offers an alternative way of login for the Website-Users of your TYPO3 sites, using their electronic identity</source>
+            <target>Die eID-Login Erweiterung ermöglicht eine alternative Anmeldung für registrierte Website-Benutzer Ihrer TYPO3-Seiten mittels einer elektronischen Identität</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_2">
+            <source>The German Identity Card ("Personalausweis") for example can then be used to login in a secure manner.</source>
+            <target>Benutzer können sich dann z.B. mit der Online-Ausweisfunktion ihres Personalausweises auf sichere Weise anmelden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_3">
+            <source>To use the eID-Login for a specific TYPO3 site, some setup in the site must take place:</source>
+            <target>Um den eID-Login für eine bestimmte TYPO3-Seite zu nutzen, muss in dieser folgendes vorhanden sein:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_4">
+            <source>It needs one free acccessible page without any content but an own template record. This must be configured as 'Rootlevel' and include the static template 'eID-Login SAML Template (eidlogin)' of the eID-Login extension. This page should not be visible in menues.</source>
+            <target>Sie braucht eine frei zugängliche Seite ohne Inhalte aber mit eigenem Template. Dieses muss als 'Wurzelebene' konfiguriert werden und das statische Template 'eID-Login SAML Template (eidlogin)' der eID-Login Erweiterung einbinden. Die Seite sollte nicht in Menüs eingebunden sein.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_5">
+            <source>There must be at least one free accessible page holding the Frontend-Plugin 'eID-Login Link' as content element. This plugin will render a logo, the link to start an eID-Login and a link to the FAQ regarding eID-Login or an logout link. Also messages which may occur when doing an eID-Login are rendered by the plugin as TYPO3 Flash-Messages. Website-Users which may use the plugin must be configured using the 'Record Storage Page' option.</source>
+            <target>Mindestens eine frei zugängliche Seite mit dem Frontend-Plugin 'eID-Login Link' als Inhaltselement muss enthalten sein. Dieses Plugin stellt neben einem Logo Verweise dar, welche den eID-Login starten und zu den eID-Login FAQ führen, oder einen Verweis zum Abmelden. Ausserdem erfolgt durch das Plugin die Anzeige von Meldungen, die während des eID-Login Vorgangs auftreten können, in Form von TYPO3 Flash-Messages. Die Website-Benutzer, welche dieses Plugin nutzen können, müssen über die Option 'Datensatzsammlung' festgelegt werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_6">
+            <source>At least one access restricted page holding the Frontend-Plugin 'eID-Login Settings' to render the links which enable the creation and deletion of an eID connection for Website-Users. Messages which occur in the process are rendered there as TYPO3 Flash-Messages. The pugin also provides a checkbox to disable the password based login for the specific Website-User. It will be rendered, if an eID connection exists. Website-Users which may use this plugin must be configured using the 'Record Storage Page' option. The value of the option must match the one of the 'eID-Login Link' plugin mentioned above.</source>
+            <target>Mindestens eine zugangsgeschützte Seite mit dem Frontend-Plugin 'eID-Login Settings' als Inhaltselement muss enthalten sein. Dieses Plugin dient dazu die Verweise anzuzeigen, mit welchen eine eID-Verknüpfung erstellt oder gelöscht werden kann. Durch das Plugin erfolgt auch die Anzeige der dabei auftretenden Meldungen in Form von TYPO3 Flash-Messages. Das Plugin stellt zudem eine Checkbox bereit, um die Passwort basierte Anmeldung für den jeweiligen Website-Benutzer unterbinden zu können. Sie wird angezeigt, falls eine eID-Verknüpfung existiert. Die Website-Benutzer, welche dieses Plugin nutzen können, müssen über die Option 'Datensatzsammlung' festgelegt werden. Der Wert dieser Option muss dem oben erwähnten Plugin 'eID-Login Link' entsprechen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_nosite">
+            <source>No sites have been found. Please create a site with pages as described above, to configure the eID-Login for this site.</source>
+            <target>Es wurden keine TYPO3-Seiten gefunden. Bitte erstellen Sie eine TYPO3-Seite mit den oben genannten Eigenschaften ein, um den eID-Login dann für diese einzurichten.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_1">
+            <source>TYPO3 Site</source>
+            <target>TYPO3-Seite</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_2">
+            <source>eID-Login SAML-Template present</source>
+            <target>eID-Login SAML-Template vorhanden</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_3">
+            <source>Frontend-Plugin 'eID-Login Link' present</source>
+            <target>Frontend-Plugin 'eID-Login Link' vorhanden</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_4">
+            <source>Frontend-Plugin 'eID-Login Settings' present</source>
+            <target>Frontend-Plugin 'eID-Login Settings' vorhanden</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_5">
+            <source>Record Storage Page configured correctly</source>
+            <target>Datensatzsammlung korrekt eingerichtet</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_th_6">
+            <source>eID-Login is configured</source>
+            <target>eID-Login ist eingerichtet</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_yes">
+            <source>Yes</source>
+            <target>Ja</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_no">
+            <source>No</source>
+            <target>Nein</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_settings">
+            <source>Open Settings</source>
+            <target>Zu den Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_index_setup_missing">
+            <source>Site is missing needed setup</source>
+            <target>TYPO3-Seite hat nicht die erforderlichen Eigenschaften</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_step_1">
+            <source>Overview</source>
+            <target>Übersicht</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_step_2">
+            <source>(1) Select IdP</source>
+            <target>(1) IdP wählen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_step_3">
+            <source>(2) Configure IdP</source>
+            <target>(2) IdP konfigurieren</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_step_4">
+            <source>(3) Connect eID</source>
+            <target>(3) eID verknüpfen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_1">
+            <source>What is the eID-Login extension?</source>
+            <target>Was ist die eID-Login extension?</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_1">
+            <source>The eID-Login extension enables users to login to TYPO3 sites using an </source>
+            <target>Die eID-Login Erweiterung ermöglicht Nutzern die Anmeldung an TYPO3-Seiten mit einer </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_2">
+            <source>eID-Card</source>
+            <target>eID-Karte</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_3">
+            <source>, i.e. the </source>
+            <target>z.B. der </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_4">
+            <source>eID function</source>
+            <target>Online-Ausweisfunktion</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_5">
+            <source> of the German Identity Card.</source>
+            <target> des Personalausweises.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_6">
+            <source>For the connection of an eID to their user account and the eID based login, users need an </source>
+            <target>Für die Verknüpfung der eID mit dem Nutzerkonto, sowie für die Anmeldung mittels eID benötigen die Nutzer einen </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_7">
+            <source>, this means an application like AusweisApp2 or the Open e-Card App.</source>
+            <target>, d.h. eine Anwendung wie z.B. die AusweisApp2 oder die Open e-Card App.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_8">
+            <source>By using the German eID card (or another eID) and the associated PIN code the eID-Login provides a secure alternative to the login using username and password.</source>
+            <target>Durch die Verwendung der Online-Ausweisfunktion des Personalausweises (bzw. einer anderen eID) und der zugehörigen selbstgewählten PIN stellt der eID-Login eine sicherere Alternative zur Anmeldung mit Benutzername und Passwort dar.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_9">
+            <source>Important!</source>
+            <target>Wichtig!</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_10">
+            <source>When using the eID-Login extension in it`s default configuration, no personal data from the eID card will be read. Only the </source>
+            <target>Bei der Verwendung des eID-Logins werden in der Standardkonfiguration keine persönlichen Daten aus dem Personalausweis ausgelesen. Stattdessen wird die </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_11">
+            <source>pseudonym function</source>
+            <target>Pseudonymfunktion</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_12">
+            <source> of the eID is being used.</source>
+            <target> des Ausweises verwendet.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_13">
+            <source>If any other data is being read, the user will be informed about it.</source>
+            <target>Werden davon abweichend weitere Daten ausgelesen, so wird der Benutzer darüber informiert.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_2">
+            <source>Setup with SkIDentity as Identity Provider</source>
+            <target>Einrichtung mit SkIDentity als Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_14">
+            <source>The easiest way to setup the eID-Login extension is by using the </source>
+            <target>Die einfachste Art die eID-Login Erweiterung einzurichten ist die Verwendung des </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_15">
+            <source> which has been preconfigured for ease of use. For the default setup, which means only using the pseudonym function, no costs incur. The only requirement is the </source>
+            <target>, welcher bereits für die unkomplizierte Nutzung vorkonfiguriert ist. Für die Standardkonfiguration, bei der die Pseudonymfunktion bei der Anmeldung verwendet wird, fallen keine Kosten an. Einzige Voraussetzung ist die </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_16">
+            <source>registration</source>
+            <target>Registrierung</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_17">
+            <source> at SkIDentity.</source>
+            <target> bei SkIDentity.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_3">
+            <source>Setup with another Identity Provider</source>
+            <target>Einrichtung mit SkIDentity als Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_18">
+            <source>For the eID-Login any Identity Provider using the SAML protocol for communication with TYPO3 can be used. Beyond that any service providing an eID-Server according to </source>
+            <target>Es können für den eID-Login alle Identity Provider angebunden werden, welche das SAML Protokoll nutzen, um mit TYPO3 zu kommunizieren. Darüber hinaus ist die Nutzung von Diensten möglich, die einen eID-Server gemäß </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_19">
+            <source> (also based on SAML) can be used.</source>
+            <target> zur Verfügung stellen, welcher auch auf SAML basiert.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_4">
+            <source>Technical background information</source>
+            <target>Technischer Hintergrund</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_20">
+            <source>The eID-Login extension uses the SAML protocol, to let users login  via an external service (Identity Provider) using an eID.</source>
+            <target>Die eID-Login Erweiterung nutzt das SAML Protokoll, damit sich Benutzer Ihrer TYPO3-Seiten über einen externen Dienst (Identity Provider) unter Nutzung der Online-Ausweisfunktion anmelden können.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_21">
+            <source>The SAML protocol defines two major and collaborating entities:</source>
+            <target>Das SAML Protokoll definiert die folgenden beiden Entitäten:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_22">
+            <source>An entity which provides any kind of service over the web. In the scope of the eID-Login extension this is your TYPO3 instance, which contains a SAML Service Provider component.</source>
+            <target>Eine Entität, welche einen Dienst über das Web bereitstellt. Im Rahmen der eID-Login Erweiterung ist es Ihre TYPO3-Instanz, welche eine SAML Service Provider Komponente enthält.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_23">
+            <source>An entity which authenticates the User and returns a corresponding assertion to the Service Provider. In the scope of the eID-Login extension this can be any standard compliant SAML Identity Provider which supports eID-based authentication, for example the</source>
+            <target>Eine Entität, welche den Benutzer authentifiziert und eine entsprechende Bestätigung (Assertion) an den Service Provider zurück gibt. Im Rahmen der eID-Login Erweiterung kann dies jeder zum SAML-Standard kompatible Identity Provider sein, welcher eID-basierte Authentisierung unterstützt, wie zum Beispiel der</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_24">
+            <source>The eID-Login procedure comprises the following steps:</source>
+            <target>Der eID-Login Prozess besteht aus folgenden Schritten:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_25">
+            <source>The User initiates the login procedure at the Service Provider.</source>
+            <target>Der Benutzer initiert den Anmeldevorgang am Service Provider.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_26">
+            <source>The Service Provider creates a SAML authentication request (AuthnRequest) and sends it together with the User via redirect to the Identity Provider.</source>
+            <target>Der Service Provider erstellt eine SAML Authentisierungsanfrage (AuthnRequest) und sendet diese zusammen mit dem Benutzer über einen Redirect an den Identity Provider.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_27">
+            <source>The Identity Provider authenticates the User using her eID via an eID-Client.</source>
+            <target>Der Identity Provider authentifiziert den Benutzer über einen eID-Client unter Verwendung der eID.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_28">
+            <source>The Identity Provider returns the result of the authentication procedure to the Service Provider (Response).</source>
+            <target>Der Identity Provider gibt das Ergebnis der Authentifizierung an den Service Provider zurück (Response).</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_29">
+            <source>The Service Provider validates the provided response and logs in the User in case of success.</source>
+            <target>Der Service Provider validiert das erhaltene Ergebnis und meldet im Erfolgsfall den Benutzer an.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_close">
+            <source>Close</source>
+            <target>Schliessen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_5">
+            <source>Overview</source>
+            <target>Übersicht</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_30">
+            <source>The eID-Login extension offers an alternative way of login for the registered users of TYPO3 site, using their electronic identity (</source>
+            <target>Die eID-Login Erweiterung ermöglicht eine alternative Anmeldung für registrierte Benutzer einer TYPO3-Seite mittels einer elektronischen Identität (</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_31">
+            <source>). For example the German eID can then be used for a secure login.</source>
+            <target>). Benutzer können sich dann z.B. mit der Online-Ausweisfunktion ihres Personalausweises auf sichere Weise anmelden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_32">
+            <source>Setup of the eID-Login extension for a TYPO3 site consists of three steps:</source>
+            <target>Die Einrichtung der eID-Login Erweiterung für eine TYPO3-Seite erfolgt in drei Schritten:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_33">
+            <source>Select Identity Provider</source>
+            <target>Identity Provider wählen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_34">
+            <source>For the usage of the eID-Login extension a service which makes the eID accessible is needed. This service is called</source>
+            <target>Für die Nutzung der eID-Login Erweiterung wird ein Dienst benötigt, der die eID zugänglich macht. Dieser wird als</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_35">
+            <source> or in short </source>
+            <target> oder kurz </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_36">
+            <source> . You can choose to use the preconfigured </source>
+            <target> bezeichnet. Sie haben die Möglichkeit den </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_37">
+            <source> service or select another service.</source>
+            <target> Dienst mit Voreinstellungen zu nutzen oder einen anderen Dienst zu wählen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_38">
+            <source>Configuration at the Identity Provider</source>
+            <target>Konfiguration am Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_39">
+            <source>At the Identity Provider your TYPO3 site, which serves as</source>
+            <target>Beim Identity Provider muss Ihre TYPO3-Seite, die als</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_40">
+            <source>, must be registered. The process of registration depends on the respective Identity Provider. The information needed for registration is provided in step 2.</source>
+            <target> dient, eingetragen werden. Das exakte Vorgehen ist vom jeweiligen Anbieter abhängig. Die benötigten Informationen werden Ihnen in Schritt 2 bereitgestellt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_41">
+            <source>Connect eID</source>
+            <target>eID verknüpfen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_42">
+            <source>In order to use a German eID ('Personalausweis') or another eID for the login at the configured TYPO3 site, the eID must be connected to an Website-User account.</source>
+            <target>Um sich künftig mit dem Personalausweis oder einer anderen eID bei der konfigurierten TYPO3-Seite anmelden zu können, muss die eID noch mit dem Website-Benutzer verknüpft werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_43">
+            <source>Continue with SkIDentity</source>
+            <target>Weiter mit SkIDentity</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_44">
+            <source>Please click on the (?) icon for help regarding the setup or more information.</source>
+            <target>Klicken Sie auf das (?) Icon für Hilfe bei der Einrichtung oder für weitere Informationen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_45">
+            <source>Continue with another IdP</source>
+            <target>Weiter mit anderem IdP</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_6">
+            <source>Select Identity Provider</source>
+            <target>Identity Provider wählen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_46">
+            <source>Select an Identity Provider. It must support the SAML protocol.</source>
+            <target>Wählen Sie einen Identity Provider. Dieser muss das SAML-Protokoll unterstützen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_47">
+            <source>Insert the Identity Providers Metadata URL in the respective form field and assign an Entity ID, which must be used for the configuration of the Identity Provider in the next step.</source>
+            <target>Tragen Sie dessen Metadaten URL in das entsprechende Feld ein und bestimmen Sie die EntityID, die Sie im nächsten Schritt bei Ihrem Identity Provider eintragen müssen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_1">
+            <source>Identity Provider Metadata URL</source>
+            <target>Identity Provider Metadaten URL</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_48">
+            <source>When inserting the Metadata URL, the values in the advanced settings will be updated. Alternatively the advanced settings can be inserted by hand.</source>
+            <target>Durch das Eintragen der Metadaten URL werden die Werte in den fortgeschrittenen Einstellungen aktualisiert. Alternativ können Sie die fortgeschrittenen Einstellungen von Hand anpassen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_49">
+            <source>Usually the domain of the TYPO3 site is used.</source>
+            <target>Üblicherweise wird die Domain der TYPO3-Seite genutzt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_2">
+            <source>Enforce encryption of SAML assertions (Check only if the selected Identity Provider supports this feature!)</source>
+            <target>Verschlüsselung von Authentifizierungsanworten erzwingen (Aktivieren Sie diese Option nur, wenn dies vom Identity Provider unterstützt wird!)</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_49">
+            <source>Usually the domain of your TYPO3 site is used.</source>
+            <target>Üblicherweise wird die Domain Ihrer TYPO3-Seite genutzt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_back">
+            <source>Back</source>
+            <target>Zurück</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_next">
+            <source>Next</source>
+            <target>Weiter</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_7">
+            <source>Advanced Settings</source>
+            <target>Fortgeschrittene Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_50">
+            <source>URL of the Identity Provider to which the SAML authentication request will be sent.</source>
+            <target>URL des Identity Provider zu welcher die SAML Authentisierungsanfrage gesendet wird.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_3">
+            <source>Signature Certificate of the Identity Provider</source>
+            <target>Signatur-Zertifikat des Identity Providers</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_51">
+            <source>Certificate to validate the signature of the authentication response.</source>
+            <target>Zertifikat um die Signatur der Authentifizierungsantwort zu validieren.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_4">
+            <source>Encryption Certificate of the Identity Provider</source>
+            <target>Verschlüsselungszertifikat des Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_52">
+            <source>Certificate to encrypt the authentication request. Omitting the element means that the SAML requests are not encrypted.</source>
+            <target>Zertifikat um die Authentisierungsanfrage zu verschlüsseln. Falls kein Wert eingetragen ist, so werden Anfragen nicht verschlüsselt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_5">
+            <source>AuthnRequestExtension XML element</source>
+            <target>AuthnRequestExtension XML Element</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_53">
+            <source>For a connection according to </source>
+            <target>Um eine Verbindung gemäß </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_54">
+            <source> the corresponding AuthnRequestExtension XML element must be inserted here.</source>
+            <target> zu nutzen, muss das entsprechende AuthnRequestExtension XML Element hier eingetragen werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_8">
+            <source>Identity Provider</source>
+            <target>Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_55">
+            <source>Now go to the choosen Identity Provider and use the following data to register the Service Provider there:</source>
+            <target>Gehen Sie jetzt zum ausgewählten Identity Provider und nutzen Sie die folgenden Daten, um den Service Provider dort einzutragen:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_56">
+            <source>You have chosen SkIDentity. Click the button to the right, to go to SkIDentity.</source>
+            <target>Sie haben SkIDentity ausgewählt. Klicken Sie den Button rechts um zu SkIDentity zu gelangen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_57">
+            <source>Open SkIDentity</source>
+            <target>SkIDentity öffnen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_9">
+            <source>Service Provider Metadata</source>
+            <target>Service Provider Metadaten</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_58">
+            <source>The metadata as provided by the Service Provider at the URL</source>
+            <target>Die Service Provider Metadaten, auch bereitgestellt unter</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_10">
+            <source>Connect eID</source>
+            <target>eID verknüpfen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_59">
+            <source>To use the eID-Login, the eID must be connected to the user account. For this you need an eID-Card, like the German eID, a suitable cardreader and an active eID-Client (for example</source>
+            <target>Um den eID-Login nutzen zu können, muss die eID mit dem Konto verknüpft werden. Dafür benötigt man eine eID-Karte, z.B. einen Personalausweis, einen geeigneten Kartenleser und einen gestarteten eID-Client (z.B.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_60">
+            <source> or </source>
+            <target> oder </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_61">
+            <source>After establishing the connection the eID-Login can be used on every page where the Frontend-Plugin 'eID-Login Link' is used.</source>
+            <target>Nach der Verknüpfung kann der eID-Login mit dem entsprechenden Link auf jeder Seite mit dem Frontend-Plugin 'eID-Login Link' verwendet werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_62">
+            <source>Now login to the</source>
+            <target>Loggen Sie sich nun im</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_62a">
+            <source>of the TYPO3 site, to connect the user account with you eID. This step is optional and can be done later at any time. Just visit the page where the Frontend-Plugin 'eID-Login Settings' is used as a logged is Website-User.</source>
+            <target>der TYPO3-Seite ein, um das entsprechende Konto mit Ihrer eID verknüpfen. Dieser Schritt ist optional und kann jederzeit später erfolgen und rückgängig gemacht werden. Besuchen Sie dazu einfach als eingeloggter Website-Benutzer eine Seite, auf welcher das Frontend-Plugin 'eID-Login Settings' verwendet wird.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_63">
+            <source>Please note:</source>
+            <target>Bitte beachten Sie:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_64">
+            <source>After finishing the wizard, this page will show a form for direct access to the eID-Login settings of the corresponding TYPO3 site. To use the wizard again, reset the settings of the eID-Login extension for this site.</source>
+            <target>Nach dem dem Abschließen der Konfiguration wird auf dieser Seite ein Formular für den direkten Zugriff auf die eID-Login Konfiguration für die entsprechende TYPO3-Seite angezeigt. Um den Wizard erneut zu nutzen, setzen Sie die Einstellungen der eID-Login Erweiterung für diese TYPO3-Seite zurück.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_65">
+            <source>Finish wizard</source>
+            <target>Einrichtung abschließen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_6">
+            <source>eID-Login is activated</source>
+            <target>eID-Login ist aktiviert</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_66">
+            <source>If the eID-Login is activated, the eID-Login link is shown and users can edit eID connections.</source>
+            <target>Ist der eID-Login aktiviert, so wird der eID-Login Link angezeigt und Benutzer können Ihre eID-Verknüpfung editieren.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_67">
+            <source>Please Note: Required values in the following form are labeled with a *</source>
+            <target>Bitte beachten Sie: Pflichtfelder sind mit einem * markiert.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_11">
+            <source>Service Provider Settings</source>
+            <target>Service Provider Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_68">
+            <source>EntityID of the Service Provider as configured at the Identity Provider</source>
+            <target>EntityID des Service Provider, wie beim Identity Provider konfiguriert.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_69">
+            <source>Assertion Consumer URL is determined by the domain of your Service Provider and cannot be changed. Use this value to configure the Service Provider at the Identity Provider.</source>
+            <target>Die Assertion Consumer URL ist bestimmt durch die Domain des Service Providers und kann nicht geändert werden. Nutzen Sie diesen Wert, um den Service Provider beim Identity Provider zu konfigurieren.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_70">
+            <source>SAML Metadata URL is determined by the domain of your Service Provider and cannot be changed. Use this value to configure the Service Provider at the Identity Provider.</source>
+            <target>Die SAML Metadaten URL ist bestimmt durch die Domain des Service Providers und kann nicht geändert werden. Nutzen Sie diesen Wert, um den Service Provider beim Identity Provider zu konfigurieren.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_7">
+            <source>SAML Metadata URL</source>
+            <target>SAML Metadaten URL</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_8">
+            <source>Only accept encrypted SAML assertions from the Identity Provider. This must be supported by the Identity Provider.</source>
+            <target>Nur verschlüsselte SAML Authentifizierungsantworten vom Identity Provider akzeptieren. Der Identity Provider muss dies unterstützen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_12">
+            <source>Identity Provider Settings</source>
+            <target>Identity Provider Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_9">
+            <source>EntityID of the Identity Provider *</source>
+            <target>EntityID des Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_71">
+            <source>URL of the Identity Provider to which the SAML authentication request will be sent.</source>
+            <target>URL des Identity Provider zu welcher die SAML Authentisierungsanfrage gesendet wird.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_72">
+            <source>Certificate to validate the signature of the authentication response.</source>
+            <target>Zertifikat um die Signatur der Authentifizierungsantwort zu validieren.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_10">
+            <source>Signature Certificate of the Identity Provider *</source>
+            <target>Signatur-Zertifikat des Identity Providers</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_73">
+            <source>Certificate to encrypt the authentication request. Omitting the element means that the SAML requests are not encrypted.</source>
+            <target>Zertifikat um die Authentisierungsanfrage zu verschlüsseln. Falls kein Wert eingetragen ist, so werden Anfragen nicht verschlüsselt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_11">
+            <source>Encryption Certificate of the Identity Provider</source>
+            <target>Verschlüsselungszertifikat des Identity Provider</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_74">
+            <source>For a connection according to </source>
+            <target>Um eine Verbindung gemäß </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_75">
+            <source> the corresponding AuthnRequestExtension XML element must be inserted here.</source>
+            <target> zu nutzen, muss das entsprechende AuthnRequestExtension XML Element hier eingetragen werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_lbl_12">
+            <source>AuthnRequestExtension XML element</source>
+            <target>AuthnRequestExtension XML Element</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_save">
+            <source>Save</source>
+            <target>Speichern</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_reset">
+            <source>Reset</source>
+            <target>Zurücksetzen</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_13">
+            <source>SAML Certificate Rollover</source>
+            <target>SAML Zertifikatswechsel</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_76">
+            <source>The active certificates expire in </source>
+            <target>Die aktuellen Zertifikate laufen in </target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_77">
+            <source> days. For a regular certificate rollover no action is required. The rollover will be done automatically. But you always have the option to do a manual rollover, if needed.</source>
+            <target> Tagen ab. Für einen regulären Zertifikatswechsel ist kein Handeln erforderlich. Der Wechsel auf ein neues Zertifikat erfolgt automatisch. Sie haben aber jederzeit auch die Möglichkeit bei Bedarf einen manuellen Zertifikatswechsel durchzuführen.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_14">
+            <source>Current certificates:</source>
+            <target>Aktuelle Zertifikate:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_78">
+            <source>The currently active certificate ends with:</source>
+            <target>Das aktuell verwendete Zertifikat endet mit:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_79">
+            <source>The newly prepared certificate, which is not yet active, ends with:</source>
+            <target>Das vorbereitetet Zertifikat, welches noch nicht aktiviert ist, endet mit:</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_80">
+            <source>Signature</source>
+            <target>Signatur</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_81">
+            <source>Encryption</source>
+            <target>Verschlüsselung</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_15">
+            <source>Manual Certificate Rollover</source>
+            <target>Manueller Zertifikatswechsel</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_16">
+            <source>(1) Certificate Rollover Preparation</source>
+            <target>(1) Vorbereitung des Zertifikatswechsels</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_82">
+            <source>In a first step new certificates will be created, which will be in the state</source>
+            <target>In einem ersten Schritt werden neue Zertifikate erzeugt, welche den Status</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_83">
+            <source>prepared</source>
+            <target>vorbereitet</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_84">
+            <source>but not activated.</source>
+            <target>haben, aber noch nicht aktiviert sind.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_85">
+            <source>After some time the Identity Provider should have noticed the presence of the new certificates or you must explicitly inform the Identity Provider about them. After this has happened the rollover can be executed.</source>
+            <target>Nach einiger Zeit sollte der Identity Provider die neuen Zertifikate erkannt und eingelesen haben, oder Sie müssen diese dort explizit konfigurieren. Danach kann der Zertifikatswechsel durchgeführt werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_86">
+            <source>Prepare Certificate Rollover</source>
+            <target>Zertifikatswechsel vorbereiten</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_head_17">
+            <source>(2) Activation of prepared certificates</source>
+            <target>(2) Aktivierung der vorbereiteten Zertifikate</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_87">
+            <source>The activation of the new certificates will happen automatically after some time, but can also be done by clicking the button below.</source>
+            <target>Die Aktivierung der vorbereiteten Zertifikate erfolgt nach einiger Zeit automatisch, kann aber auch durch Klick auf den untenstehenden Button sofort ausgeführt werden.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_88">
+            <source>CAUTION: Only do this step manually, if you have made sure that the prepared certificates have been successfully configured at the Identity Provider or there are other important reasons to change the certificates immediately.</source>
+            <target>ACHTUNG: Führen Sie diesen Schritt nur dann durch, wenn Sie sicher sind, dass die vorbereiteten Zertifikate erfolgreich beim Identity Provider konfiguriert wurden oder es andere wichtige Gründe für einen sofortigen Zertifikatswechsel gibt.</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_89">
+            <source>Activate prepared certificates</source>
+            <target>Vorbereitete Zertifikate aktivieren</target>
+        </trans-unit>
+        <trans-unit id="be_tpl_wiz_txt_90">
+            <source>The button is only active if the rollover has been prepared already!</source>
+            <target>Dieser Knopf ist nur aktiv, wenn ein Zertifikatswechsel bereits vorbereitet wurde!</target>
+        </trans-unit>
+        <!-- be js -->
+        <trans-unit id="be_js_txt_show_idp">
+            <source>Advanced Settings</source>
+            <target>Fortgeschrittene Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_hide_idp">
+            <source>Hide Advanced Settings</source>
+            <target>Fortgeschrittene Einstellungen verbergen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_show_sp">
+            <source>Show Service Provider Metadata</source>
+            <target>Service Provider Metadaten anzeigen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_hide_sp">
+            <source>Hide Service Provider Metadata</source>
+            <target>Service Provider Metadaten verbergen</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_idp_meta_fetch">
+            <source>Identity Provider settings could not be fetched</source>
+            <target>Identity Provider Einstellungen konnten nicht geladen werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_sp_meta_fetch">
+            <source>Service Provider metadata could not be fetched</source>
+            <target>Service Provider Metadaten konnten nicht geladen werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_save">
+            <source>Settings could not be saved</source>
+            <target>Einstellungen konnten nicht gespeichert werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_activate_title">
+            <source>Activate eID-Login</source>
+            <target>eID-Login aktivieren</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_activate_content">
+            <source>Please confirm that the Service Provider has been registered at the Identity Provider. Pressing the 'Next' button will activate the eID-Login.</source>
+            <target>Bitte stellen Sie sicher, dass Sie den Service Provider beim Identity Provider eingetragen haben. Die eID-Login App wird mit dem Klick auf 'Weiter' aktiviert.</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_cancel">
+            <source>Cancel</source>
+            <target>Abbrechen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_next">
+            <source>Next</source>
+            <target>Weiter</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_activate">
+            <source>eID-Login could not be activated</source>
+            <target>eID-Login konnte nicht aktivert werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_save_title">
+            <source>Save Settings</source>
+            <target>Einstellungen speichern</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_save_content">
+            <source>Changing the Identity Provider Settings will very likely make existing eID connections of Website Users from the site`s Record Storage Page not work anymore, as they are bound to a specific Identity Provider! You should make a backup of the settings before saving! Please decide, if the existing eID connections of Website Users from the site`s Record Storage Page should be deleted when saving.</source>
+            <target>Änderungen an den Identity Provider Einstellungen führen mit hoher Wahrscheinlichkeit dazu, dass die bestehende eID-Verknüpfungen der Website-Benutzer aus der Datensatzsammlung der TYPO3-Seite nicht mehr genutzt werden können, da Sie an einen bestimmten Identity Provider gebunden sind! Sie sollten ein Backup Ihrer Einstellungen machen, bevor Sie speichern! Bitte entscheiden Sie, ob die bestehenden eID-Verknüpfungen der Website-Benutzer aus der Datensatzsammlung der TYPO3-Seite gelöscht werden sollen.</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_save_delete">
+            <source>Save and delete eID connections</source>
+            <target>Speichern, eID-Verknüpfungen löschen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_save_only">
+            <source>Save and keep eID connections</source>
+            <target>Speichern, eID-Verknüpfungen behalten</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_reset_title">
+            <source>Reset Settings</source>
+            <target>Einstellungen zurücksetzen</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_reset_content">
+            <source>Reset of settings will also delete eID connections of the Website Users from the site`s Record Storage Page. After this they will not be able to use the eID-Login anymore and they must create new eID connections! Are you sure?</source>
+            <target>Das Zurücksetzen der Einstellungen wird auch die eID-Verknüpfungen der Website-Benutzer aus der Datensatzsammlung der TYPO3-Seite löschen. Danach wird ihnen der eID-Login nicht mehr möglich sein und sie müssen neue eID-Verknüpfungen erstellen. Sind Sie sicher?</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_yes">
+            <source>Yes</source>
+            <target>Ja</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_settings_reset">
+            <source>Settings could not be reset</source>
+            <target>Einstellungen konnten nicht zurückgesetzt werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_preprollover_title">
+            <source>Prepare Certificate Rollover</source>
+            <target>Zertifikatswechsel vorbereiten</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_preprollover_content_nonew">
+            <source>This will create new certificates which will be propagated in the Service Provider SAML Metadata. Are you sure?</source>
+            <target>Dies wird neue Zertifikate erzeugen und über die Service Provider SAML Metadaten veröffentlichen. Sind Sie sicher?</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_preprollover_content_new">
+            <source>This will replace the already prepared certificates and replace them with a new ones which will be propagated in the Service Provider SAML Metadata. Are you sure?</source>
+            <target>Dies wird die schon vorbereiteten Zertifikate aus den Service Provider SAML Metadaten entfernen und Sie durch neue Zertifikate ersetzen. Sind Sie sicher?</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_preprollover">
+            <source>Certificate Rollover could not be prepared</source>
+            <target>Zertifikatswechsel konnte nicht ausgeführt werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_scs_preprollover">
+            <source>Certificate Rollover has been prepared</source>
+            <target>Zertifikatswechsel wurde vorbereitet</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_execrollover_title">
+            <source>Activate prepared certificates</source>
+            <target>Vorbereitete Zertifikate aktivieren</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_execrollover_content">
+            <source>This will remove the currently used certificates from the Service Provider SAML Metadata and activate the prepared certificates. Are you sure?</source>
+            <target>Dies wird die derzeit genutzten Zertifikate aus den Service Provider SAML Metadaten entfernen und die vorbereiteten Zertifikate aktivieren. Sind Sie sicher?</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_err_execrollover">
+            <source>Certificate Rollover could not be executed</source>
+            <target>Zertifikatswechsel konnte nicht ausgeführt werden</target>
+        </trans-unit>
+        <trans-unit id="be_js_msg_scs_execrollover">
+            <source>Certificate Rollover has been executed</source>
+            <target>Zertifikatswechsel wurde ausgeführt</target>
+        </trans-unit>
+        <trans-unit id="be_js_txt_nocert">
+            <source>No new certificate prepared yet.</source>
+            <target>Noch kein neues Zertifikat vorbereitet.</target>
+        </trans-unit>
+        <!-- be code -->
+        <trans-unit id="be_select_site">
+            <source>Select Site ...</source>
+            <target>Seite auswählen ...</target>
+        </trans-unit>
+        <!-- be messages error  -->
+        <trans-unit id="be_msg_err_idp_cert_enc_invalid_key_length">
+            <source>Encryption Certificate of the Identity Provider has an insufficent public key length. The minimal valid key length is </source>
+            <target>Verschlüsselungszertifikat des Identity Providers beinhaltet einen öffentlichen Schlüssel unzureichender Länge. Die minimal gültige Schlüssellänge ist </target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_cert_enc_invalid">
+            <source>Encryption Certificate of the Identity Provider could not be read</source>
+            <target>Verschlüsselungszertifikat des Identity Providers konnte nicht gelesen werden</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_cert_sign_invalid_key_length">
+            <source>Signature Certificate of the Identity Provider has an insufficent public key length. The minimal valid key length is </source>
+            <target>Signatur-Zertifikat des Identity Providers beinhaltet einen öffentlichen Schlüssel unzureichender Länge. Die minimal gültige Schlüssellänge ist </target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_cert_sign_invalid">
+            <source>Signature Certificate of the Identity Provider could not be read</source>
+            <target>Signatur-Zertifikat des Identity Providers konnte nicht gelesen werden</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_cert_sign_missing">
+            <source>Signature Certificate of the Identity Provider is missing</source>
+            <target>Signatur-Zertifikat des Identity Providers fehlt</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_entityid_missing">
+            <source>EntityID of the Service Provider is missing</source>
+            <target>EntityID des Service Providers fehlt</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_cert_enc_needed">
+            <source>For using the SAML Profile according to BSI TR-03130 an Encryption Certificate of the Identity Provider is needed</source>
+            <target>Um das SAML Profil gemäß BSI TR-03130 zu nutzen, ist die Angabe eines Verschlüsselungszertifikates des Identity Providers notwendig</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_tr03130ext_enforce_enc_needed">
+            <source>For using the SAML Profile according to BSI TR-03130 the encryption of SAML assertions is needed</source>
+            <target>Um das SAML Profil gemäß BSI TR-03130 zu nutzen, ist die Verschlüsselung von Authentifizierungsantworten notwendig</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_tr03130ext_invalid">
+            <source>AuthnRequestExtension XML Element is no valid XML</source>
+            <target>AuthnRequestExtension XML-Element ist kein valides XML</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_sso_url_invalid">
+            <source>No valid Single Sign-On URL of the Identity Provider</source>
+            <target>Keine gültige Identity Provider Single Sign-On URL</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_sso_url_no_https">
+            <source>Identity Provider Single Sign-On URL must start with https</source>
+            <target>Identity Provider Single Sign-On URL muss mit https beginnen</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_idp_sso_url_missing">
+            <source>Single Sign-On URL of the Identity Provider is missing</source>
+            <target>Single Sign-On URL des Identity Providers fehlt</target>
+        </trans-unit>
+        <trans-unit id="be_msg_err_sp_entityid_missing">
+            <source>EntityID of the Service Provider is missing</source>
+            <target>EntityID des Identity Providers fehlt</target>
+        </trans-unit>
+        <!-- be messages success  -->
+        <trans-unit id="be_msg_scs_settings_saved">
+            <source>Settings have been saved</source>
+            <target>Einstellungen wurden gespeichert</target>
+        </trans-unit>
+        <trans-unit id="be_msg_scs_activated">
+            <source>eID-Login is activated</source>
+            <target>eID-Login ist aktiviert</target>
+        </trans-unit>
+        <trans-unit id="be_msg_scs_deactivated">
+            <source>eID-Login is deactivated</source>
+            <target>eID-Login ist deaktiviert</target>
+        </trans-unit>
+        <trans-unit id="be_msg_scs_eids_deleted">
+            <source>, eID connections have been deleted</source>
+            <target>, eID-Verknüpfungen wurden gelöscht</target>
+        </trans-unit>
+        <trans-unit id="be_msg_scs_settings_reset">
+            <source>Settings have been reset</source>
+            <target>Einstellungen wurden zurückgesetzt</target>
+        </trans-unit>
+        <!-- fe templates -->
+        <trans-unit id="fe_tpl_login_login">
+            <source>eID-Login</source>
+            <target>eID-Login</target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_login_logout">
+            <source>Logout</source>
+            <target>Abmelden</target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_title">
+            <source>eID-Login Settings</source>
+            <target>eID-Login Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_hint_create">
+            <source>Your account is currently not connected to your eID. Create a connection to use your German eID ('Personalausweis') or another eID for the login into the frontend of the TYPO3 site. More information can be found in the </source>
+            <target>Ihr Konto ist derzeit nicht mit Ihrer eID verknüpft. Erstellen Sie eine Verknüpfung, um sich künftig auf sichere Weise mit ihrem Personalausweis oder einer anderen eID im Frontend der TYPO3-Seite anzumelden. Weitere Informationen finden Sie in den </target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_link_create">
+            <source>Create connection to eID</source>
+            <target>Verknüpfung zu eID erstellen</target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_hint_delete">
+            <source>Your account is currently connected to your eID. By default you can use Username and Password or eID to login. Activate the following option, to prevent the login by username and password and enhance the security of your account.</source>
+            <target>Ihr Konto ist derzeit mit Ihrer eID verknüpft. In der Grundeinstellung können Sie sich sowohl mit Nutzername und Passwort als auch mit Ihrer eID an ihrem Benutzerkonto anmelden. Aktivieren Sie die nachfolgende Option, um die Anmeldung mit Nutzername und Passwort zu verhindern und so die Sicherheit Ihres Kontos zu erhöhen. </target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_disablepwlogin">
+            <source>Disable password based login. This will be unset if you change the password, i.e. via password recovery.</source>
+            <target>Anmelden mit Passwort deaktivieren. Diese Option wird zurückgesetzt, falls Sie Ihr Passwort ändern, z.B. durch Zurücksetzten.</target>
+        </trans-unit>
+        <trans-unit id="fe_tpl_settings_link_delete">
+            <source>Delete connection to eID</source>
+            <target>eID-Verknüpfung löschen</target>
+        </trans-unit>
+        <!-- fe code -->
+        <trans-unit id="fe_msg_err_pwlogin_disabled">
+            <source>Password based login is disabled for this account</source>
+            <target>Passwort basierte Anmeldung ist für dieses Konto deaktiviert</target>
+        </trans-unit>
+        <trans-unit id="fe_msg_err_setting_email_missing">
+            <source>Password based login cannot be disabled, as no email is defined for the user account</source>
+            <target>Passwort basierte Anmeldung kann für dieses Konto nicht aktiviert werden, da das Konto keine E-Mail Adresse beinhaltet</target>
+        </trans-unit>
+        <trans-unit id="fe_msg_scs_setting_saved">
+            <source>Setting has been saved</source>
+            <target>Einstellung wurde gespeichert</target>
+        </trans-unit>
+        <!-- common -->
+        <trans-unit id="co_txt_create_eid">
+            <source>Create connection to eID</source>
+            <target>Verknüpfung zu eID erstellen</target>
+        </trans-unit>
+        <!-- common messages error  -->
+        <trans-unit id="co_msg_err_eid_creation_fail_general">
+            <source>Creation of eID connection failed! Please ensure the used eID-Card is valid.</source>
+            <target>Erstellung der eID-Verknüpfung fehlgeschlagen! Bitte stellen Sie sicher, dass die genutzte eID-Karte gültig ist.</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_login_fail_general">
+            <source>Login with eID failed! Please ensure the used eID-Card is valid.</source>
+            <target>Anmelden mit eID fehlgeschlagen! Bitte stellen Sie sicher, dass die genutzte eID-Karte gültig ist.</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_creation_abort">
+            <source>Creation of eID connection aborted</source>
+            <target>Erstellung der eID-Verknüpfung abgebrochen</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_login_abort">
+            <source>Login with eID aborted</source>
+            <target>Anmelden mit eID abgebrochen</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_creation_fail_user_already_connected">
+            <source>An eID connection already exists</source>
+            <target>Eine eID-Verknüpfung existiert bereits</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_creation_fail_eid_already_connected">
+            <source>The eID is already connected to another account</source>
+            <target>Diese eID ist schon mit einem anderen Konto verknüpft</target>
+        </trans-unit>
+        <trans-unit id="co_msg_err_eid_login_fail_eid_not_connected">
+            <source>The eID is not yet connected to an account</source>
+            <target>Diese eID ist noch nicht mit einem Konto verknüpft</target>
+        </trans-unit>
+        <!-- common messages sucess  -->
+        <trans-unit id="co_msg_scs_eid_created">
+            <source>eID connection has been created</source>
+            <target>eID-Verknüpfung wurde erstellt</target>
+        </trans-unit>
+        <trans-unit id="co_msg_scs_eid_deleted">
+            <source>eID connection has been deleted</source>
+            <target>eID-Verknüpfung wurde gelöscht</target>
+        </trans-unit>
+    </body>
+</file>
+</xliff>

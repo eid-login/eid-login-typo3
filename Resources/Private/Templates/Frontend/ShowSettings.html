@@ -1,0 +1,42 @@
+<f:flashMessages />
+<f:if condition="{activated}==1">
+  <f:then>
+    <div id="eidlogin-settings" {f:if(condition:'{settings.classesSettings}!=\'\'', then: 'class="{settings.classesSettings}"')}>
+      <span id="eidlogin-settings-data" hidden=true" data-url_disable_pw_login="{url_disable_pw_login}" data-url_enable_pw_login="{url_enable_pw_login}"></span>
+      <div id="eidlogin-settings-title" {f:if(condition:'{settings.classesSettingsTitle}!=\'\'', then: 'class="{settings.classesSettingsTitle}"')}>
+        <f:translate key="fe_tpl_settings_title"/>
+      </div>
+      <f:if condition="{eid_present}!=1">
+        <f:then>
+          <div id="eidlogin-settings-hint-create" {f:if(condition:'{settings.classesSettingsHint}!=\'\'', then: 'class="{settings.classesSettingsHint}"')}>
+            <f:translate key="fe_tpl_settings_hint_create"/><a target="_blank" href="{url_faq}"> FAQ</a>.
+          </div>
+          <div id="eidlogin-settings-create" {f:if(condition:'{settings.classesSettingsLink}!=\'\'', then: 'class="{settings.classesSettingsLink}"')}>
+            <a id="eidlogin-settings-create-a" href="{f:uri.action(action: 'createEid', arguments:{redirect: url_redirect, token: create_token})}">
+              <f:translate key="fe_tpl_settings_link_create"/>
+            </a>
+          </div>
+        </f:then>
+        <f:else>
+          <div id="eidlogin-settings-hint-delete" {f:if(condition:'{settings.classesSettingsHint}!=\'\'', then: 'class="{settings.classesSettingsHint}"')}>
+            <f:translate key="fe_tpl_settings_hint_delete"/>
+          </div>
+          <div id="eidlogin-settings-disable_pw_login" {f:if(condition:'{settings.classesSettingsDisablePwLogin}!=\'\'', then: 'class="{settings.classesSettingsDisablePwLogin}"')}>
+            <input type="checkbox" id="eidlogin-settings-disable_pw_login-checkbox" value="{disable_pw_login}" {f:if(condition:'{disable_pw_login}==\'1\'', then: 'checked="checked"')} {f:if(condition:'{settings.classesSettingsDisablePwLoginInput}!=\'\'', then: 'class="{settings.classesSettingsDisablePwLoginInput}"')}/>
+            <label id="eidlogin-settings-disable_pw_login-label" for="eidlogin-settings-disable_pw_login-checkbox" {f:if(condition:'{settings.classesSettingsDisablePwLoginLabel}!=\'\'', then: 'class="{settings.classesSettingsDisablePwLoginLabel}"')}>
+              <f:translate key="fe_tpl_settings_disablepwlogin"/>
+            </label>
+          </div>
+          <div id="eidlogin-settings-delete" {f:if(condition:'{settings.classesSettingsLink}!=\'\'', then: 'class="{settings.classesSettingsLink}"')}>
+            <a id="eidlogin-settings-delete-a" href="{f:uri.action(action: 'deleteEid', arguments:{redirect: url_redirect, token: delete_token})}">
+              <f:translate key="fe_tpl_settings_link_delete"/>
+            </a>
+          </div>
+        </f:else>
+      </f:if>
+    </div>
+  </f:then>
+  <f:section name="FooterAssets">
+    <script src="{f:uri.resource(path: 'JavaScript/eidlogin-frontend-settings.js')}"></script>
+  </f:section>
+</f:if>

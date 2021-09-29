@@ -1,0 +1,77 @@
+{
+    "name": "eid-login/eid-login-typo3",
+    "description": "The eID-Login extension for TYPO3 allows to use the German eID-card and similar electronic identity documents for secure and privacy-friendly Website-User login. For this purpose, a so-called eID-Client, such as the AusweisApp2 or the Open eCard App and eID-Service are required. In the default configuration a suitable eID-Service is provided without any additional costs.",
+    "keywords": [
+        "eID, saml, saml2, auth, authentication, sso, login"
+    ],
+    "homepage": "https://github.com/eid-login/eid-login-typo3",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "ecsec GmbH"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ecsec\\Eidlogin\\": "Classes/",
+            "Ecsec\\Eidlogin\\Dep\\": "dep"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ecsec\\EidLogin\\Tests\\": "Tests"
+        }
+    },
+    "require": {
+        "typo3/cms-core": ">=10.4.21 <11.0.0",
+        "typo3/cms-backend": ">=10.4.21 <11.0.0",
+        "typo3/cms-extbase": ">=10.4.21 <11.0.0",
+        "typo3/cms-felogin": ">=10.4.21 <11.0.0",
+        "typo3/cms-fluid": ">=10.4.21 <11.0.0",
+        "typo3/cms-frontend": ">=10.4.21 <11.0.0",
+        "typo3/cms-scheduler": ">=10.4.21 <11.0.0"
+    },
+    "require-dev": {
+        "eid-login/php-saml": "1.0.0",
+        "typo3/coding-standards": "^0.2.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "typo3/tailor": "^1.3",
+        "saschaegerer/phpstan-typo3": "^0.13.3",
+        "typo3/testing-framework": "^6.9",
+        "codeception/codeception": "^4.1",
+        "codeception/module-webdriver": "^1.0.0",
+        "codeception/module-asserts": "^1.3",
+        "codeception/module-db": "^1.1",
+        "codeception/module-cli": "^1.1",
+        "hoa/console": "^3.17",
+        "codeception/module-phpbrowser": "^1.0"
+    },
+    "scripts": {
+        "lint": "vendor/bin/php-cs-fixer fix --dry-run --config .php_cs.php",
+        "format": "vendor/bin/php-cs-fixer fix --config .php_cs.php",
+        "post-install-cmd": [
+            "if test -f '../../../scripts/security-check.sh';then ../../../scripts/security-check.sh $(pwd); fi"
+        ],
+        "post-update-cmd": [
+            "if test -f '../../../scripts/security-check.sh';then ../../../scripts/security-check.sh $(pwd); fi"
+        ]
+    },
+    "replace": {
+        "typo3-ter/eidlogin": "self.version"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "eidlogin"
+        },
+        "mozart": {
+            "dep_namespace": "Ecsec\\Eidlogin\\Dep\\",
+            "dep_directory": "/dep/",
+            "classmap_directory": "/dep/classes/",
+            "classmap_prefix": "EE_",
+            "packages": [
+                "eid-login/php-saml"
+            ]
+        }
+    }
+}

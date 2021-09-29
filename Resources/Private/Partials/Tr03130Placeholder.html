@@ -1,0 +1,36 @@
+{parsing off}
+<?xml version="1.0" encoding="UTF-8"?>
+<eid:AuthnRequestExtension xmlns:eid="http://bsi.bund.de/eID/" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="2">
+	<eid:RequestedAttributes>
+		<saml2:Attribute Name="DocumentType" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="IssuingState" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="DateOfExpiry" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="GivenNames" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="FamilyNames" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="ArtisticName" eid:RequiredAttribute="false"/>
+		<saml2:Attribute Name="AcademicTitle" eid:RequiredAttribute="false"/>
+		<saml2:Attribute Name="DateOfBirth" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="PlaceOfBirth" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="Nationality" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="BirthName" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="PlaceOfResidence" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="RestrictedID" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="AgeVerification" eid:RequiredAttribute="true">
+			<saml2:AttributeValue xsi:type="eid:AgeVerificationRequestType">
+				<eid:Age> 18 </eid:Age>
+			</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="PlaceVerification" eid:RequiredAttribute="true">
+			<saml2:AttributeValue xsi:type="eid:PlaceVerificationRequestType">
+				<eid:CommunityID> 027605 </eid:CommunityID>
+			</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="DocumentValidity" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="ResidencePermitI" eid:RequiredAttribute="true"/>
+		<saml2:Attribute Name="LevelOfAssurance" eid:RequiredAttribute="true">
+			<saml2:AttributeValue xsi:type="eid:LevelOfAssuranceType">
+				http://bsi.bund.de/eID/LoA/hoch
+			</saml2:AttributeValue>
+		</saml2:Attribute>
+	</eid:RequestedAttributes>
+</eid:AuthnRequestExtension>

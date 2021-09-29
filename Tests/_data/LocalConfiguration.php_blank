@@ -1,0 +1,162 @@
+<?php
+return [
+    'BE' => [
+        'debug' => false,
+        'explicitADmode' => 'explicitAllow',
+        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$bVJMWlNDbUNSNDBEdzFSdw$lz+IASebMX6UzUt3XQVAG5ADa30cNVQZKKYRbfetNAM',
+        'loginSecurityLevel' => 'normal',
+        'passwordHashing' => [
+            'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
+            'options' => [],
+        ],
+    ],
+    'DB' => [
+        'Connections' => [
+            'Default' => [
+                'charset' => 'utf8mb4',
+                'dbname' => 'p396typo3db',
+                'driver' => 'mysqli',
+                'host' => 'p396_typo3_mysql',
+                'password' => 'p396typo3pass',
+                'port' => 3306,
+                'tableoptions' => [
+                    'charset' => 'utf8mb4',
+                    'collate' => 'utf8mb4_unicode_ci',
+                ],
+                'user' => 'p396typo3user',
+            ],
+        ],
+    ],
+    'EXTENSIONS' => [
+        'backend' => [
+            'backendFavicon' => '',
+            'backendLogo' => '',
+            'loginBackgroundImage' => '',
+            'loginFootnote' => '',
+            'loginHighlightColor' => '',
+            'loginLogo' => '',
+        ],
+        'eidlogin' => [
+            'dummy' => '',
+            1 => [
+                'activated' => '',
+                'idp_cert_enc' => '',
+                'idp_cert_sign' => '',
+                'idp_entity_id' => '',
+                'idp_ext_tr03130' => '',
+                'idp_sso_url' => '',
+                'sp_cert_act' => '',
+                'sp_cert_act_enc' => '',
+                'sp_cert_new' => '',
+                'sp_cert_new_enc' => '',
+                'sp_cert_old' => '',
+                'sp_cert_old_enc' => '',
+                'sp_enforce_enc' => '',
+                'sp_entity_id' => '',
+                'sp_key_act' => '',
+                'sp_key_act_enc' => '',
+                'sp_key_new' => '',
+                'sp_key_new_enc' => '',
+                'sp_key_old' => '',
+                'sp_key_old_enc' => '',
+            ],
+        ],
+        'extensionmanager' => [
+            'automaticInstallation' => '1',
+            'offlineMode' => '0',
+        ],
+        'scheduler' => [
+            'maxLifetime' => '1440',
+            'showSampleTasks' => '1',
+        ],
+    ],
+    'FE' => [
+        'debug' => false,
+        'disableNoCacheParameter' => true,
+        'passwordHashing' => [
+            'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
+            'options' => [],
+        ],
+    ],
+    'GFX' => [
+        'processor' => 'GraphicsMagick',
+        'processor_allowTemporaryMasksAsPng' => false,
+        'processor_colorspace' => 'RGB',
+        'processor_effects' => false,
+        'processor_enabled' => true,
+        'processor_path' => '/usr/bin/',
+        'processor_path_lzw' => '/usr/bin/',
+    ],
+    'LOG' => [
+        'TYPO3' => [
+            'CMS' => [
+                'deprecations' => [
+                    'writerConfiguration' => [
+                        'notice' => [
+                            'TYPO3\CMS\Core\Log\Writer\FileWriter' => [
+                                'disabled' => true,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'MAIL' => [
+        'defaultMailFromAddress' => 'tobias.assmann@ecsec.de',
+        'transport' => 'sendmail',
+        'transport_sendmail_command' => '/usr/sbin/sendmail -t -i',
+        'transport_smtp_encrypt' => '',
+        'transport_smtp_password' => '',
+        'transport_smtp_server' => '',
+        'transport_smtp_username' => '',
+    ],
+    'SYS' => [
+        'caching' => [
+            'cacheConfigurations' => [
+                'hash' => [
+                    'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+                ],
+                'imagesizes' => [
+                    'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+                    'options' => [
+                        'compression' => true,
+                    ],
+                ],
+                'pages' => [
+                    'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+                    'options' => [
+                        'compression' => true,
+                    ],
+                ],
+                'pagesection' => [
+                    'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+                    'options' => [
+                        'compression' => true,
+                    ],
+                ],
+                'rootline' => [
+                    'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+                    'options' => [
+                        'compression' => true,
+                    ],
+                ],
+            ],
+        ],
+        'devIPmask' => '',
+        'displayErrors' => 0,
+        'encryptionKey' => '435abb13fceed7cc1226922347bc3c12a24773e9e49b0396f3a87be5d4f8d22f4f41bf9ae4e886bfcc01c399fed720ec',
+        'exceptionalErrors' => 4096,
+        'features' => [
+            'felogin.extbase' => true,
+            'fluidBasedPageModule' => true,
+            'rearrangedRedirectMiddlewares' => true,
+            'unifiedPageTranslationHandling' => true,
+            'yamlImportsFollowDeclarationOrder' => true,
+        ],
+        'sitename' => 'p396',
+        'systemMaintainers' => [
+            1,
+        ],
+    ],
+];

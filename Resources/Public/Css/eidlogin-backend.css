@@ -1,0 +1,158 @@
+.eidlogin-err {
+	color: red;
+}
+.eidlogin-scs {
+	color: green;
+}
+/* #eidlogin-settings-error p {
+	color: red;
+}
+#eidlogin-settings-nosite p {
+	color: red;
+} */
+#eidlogin-settings {
+  max-width: 1024px;
+}
+#eidlogin-settings h4 {
+  font-weight: bold;
+}
+#eidlogin-settings h5 {
+  font-weight: bold;
+}
+#eidlogin-settings-matrix th {
+  padding: 20px;
+  text-align: center;
+}
+#eidlogin-settings-matrix td {
+  border: 1px solid #f68705;
+  padding: 20px;
+  text-align: center;
+}
+/* taken from https://stackoverflow.com/a/32086233 */
+#eidlogin-settings nav ul {
+  font-size: 0;
+  padding: 0;
+  overflow: hidden;
+  display: inline-block;
+  border: 1px solid #f68705;
+}
+#eidlogin-settings nav li {
+  display: inline-block;
+}
+#eidlogin-settings nav a {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  background: #eee;
+  text-decoration: none;
+  color: #f68705;
+  padding: 7px 25px 7px 10px;
+  width: 220px;
+  text-align: center;
+}
+@media (max-width: 1290px) {
+  #eidlogin-settings nav a {
+    padding: 7px 0px 7px 0px;
+    width: 160px;
+  }
+}
+#eidlogin-settings nav a:after,
+#eidlogin-settings nav a:before {
+  position: absolute;
+  content: "";
+  height: 0;
+  width: 1px;
+  top: 50%;
+  left: -25px;
+  margin-top: -24px;
+  border: 24px solid #eee;
+  /*border-right: 0 !important;*/
+  border-left-color: transparent !important;
+}
+#eidlogin-settings nav a:before {
+  left: -26px;
+  border: 24px solid #eee;
+}
+#eidlogin-settings nav a.active {
+  cursor: default;
+  background: #f68705;
+  color: #fff;
+}
+#eidlogin-settings nav a.active:after {
+  border-color: #f68705;
+}
+#eidlogin-settings nav a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+@media (max-width: 1026px) {
+  #eidlogin-settings-wizard-panel-help img {
+    max-width: 300px;
+  }
+}
+#eidlogin-settings-wizard-panel-help img {
+  max-width: 100%;
+  height: auto;
+}
+#eidlogin-settings-button-help {
+  border-color: #dbdbdb !important;
+  border-radius: 60%;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  top: -3em;
+}
+#eidlogin-settings-wizard .panel a {
+  color: #f68705;
+  text-decoration: underline;
+}
+#eidlogin-settings-button-help.active {
+  background-color: #f68705 !important;
+}
+#eidlogin-settings-wizard .panel {
+  border:1px solid #f68705;
+  padding: 10px;
+  margin: 20px 0px;
+  border-radius: 10px;
+}
+#eidlogin-settings-wizard .panel h3{
+  margin-left: 3px;
+}
+#eidlogin-settings-wizard .panel .row {
+  margin-top: 10px;
+}
+#eidlogin-settings-wizard .panel ul li {
+    list-style-type: disc;
+    margin: 0em 2em;
+}
+#eidlogin-settings-wizard .panel ol li {
+  list-style-type: decimal;
+  margin: 0em 2em;
+}
+#eidlogin-settings-wizard-panel-1 ol li {
+  list-style: none !important; 
+  counter-increment: ov-counter;
+}
+#eidlogin-settings-wizard-panel-1 ol li::before {
+  content: "("counter(ov-counter)") ";
+  font-weight: bold;
+  margin-left: -1.5em;
+}
+#eidlogin-settings-wizard textarea {
+	height: 50em;
+}
+#eidlogin-settings-wizard pre {
+  width: 100%;
+  font-size: small;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+#eidlogin-settings-manual label {
+	margin-top: 2em;
+}
+#eidlogin-settings-manual input {
+	margin-bottom: 1em;
+}
+#eidlogin-settings-manual textarea {
+	height: 28em;
+}

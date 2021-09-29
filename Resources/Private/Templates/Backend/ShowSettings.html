@@ -1,0 +1,425 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:variable name="tr03130URL" value='https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03130/TR-03130_TR-eID-Server_Part1.pdf?__blob=publicationFile&v=1'/>
+<f:variable name="tr03130Placeholder"><f:render partial="tr03130Placeholder"/></f:variable>
+    <f:be.pageRenderer pageTitle="eidlogin-settings" 
+        includeRequireJsModules="{ 0:'{f:uri.resource(path:\'JavaScript/EidloginBackendSettingsModule.js\')}' }" 
+        includeJsFiles="{0: '{f:uri.resource(path:\'JavaScript/eidlogin-backend-settings.js\')}' }"
+        includeCssFiles="{0: '{f:uri.resource(path:\'Css/eidlogin-simplegrid.css\')}', 1: '{f:uri.resource(path:\'Css/eidlogin-backend.css\')}' }"
+    />
+    <div id="eidlogin-settings">
+        <f:flashMessages />
+        <h1>eID-Login - {site_identifier}</h1>
+        <span id="eidlogin-settings-datasrc" hidden="true"
+            data-settings_present="{settings_present}"
+            data-act_cert_present="{act_cert_present}"
+            data-new_cert_present="{new_cert_present}"
+            data-url_base="{base_url}"
+            data-url_fetchidpmeta="{f:uri.action(action:'fetchIdpMeta', arguments:'{url: \'IDP_META_URL\'}')}"
+            data-url_acs_redirect="{sp_acs_redirect_url}"
+            data-url_acs_post="{sp_acs_post_url}"
+            data-url_meta="{sp_meta_url}"
+            data-url_save="{f:uri.action(action:'saveSettings')}"
+            data-url_toggle_activated="{f:uri.action(action:'toggleActivated')}"
+            data-url_reset="{f:uri.action(action:'resetSettings')}"
+            data-url_preprollover="{f:uri.action(action:'prepareRollover')}"
+            data-url_execrollover="{f:uri.action(action:'executeRollover')}"
+            data-pageid_siteroot="{site_root_page_id}"
+            data-pageid_saml="{saml_page_id}"
+            >
+        </span>
+        <div id="eidlogin-settings-spinner">
+            <f:image src="EXT:eidlogin/Resources/Public/Images/loading-dark.gif" alt="spinner" />
+        </div>
+        <div id="eidlogin-settings-notls" class="hidden eidlogin-err">
+            <p><f:translate key="be_tpl_notls"/></p>
+        </div>
+        <div id="eidlogin-settings-wizard" class="hidden">
+            <div id="eidlogin-settings-wizard-steps">
+                <nav>
+                    <ul>
+                        <li><a id="eidlogin-settings-wizard-step-1" href="#" data-panel="1" class="step active"><f:translate id="be_tpl_wiz_step_1"/></a></li>
+                        <li><a id="eidlogin-settings-wizard-step-2" href="#" data-panel="2" class="step"><f:translate id="be_tpl_wiz_step_2"/></a></li>
+                        <li><a id="eidlogin-settings-wizard-step-3" href="#" data-panel="3" class="step disabled"><f:translate id="be_tpl_wiz_step_3"/></a></li>
+                        <li><a id="eidlogin-settings-wizard-step-4" href="#" data-panel="4" class="step disabled"><f:translate id="be_tpl_wiz_step_4"/></a></li>
+                    </ul>
+                </nav>
+                <button id="eidlogin-settings-button-help" data-help="help" class="step">?</button>
+            </div>
+            <!-- Help/Info -->
+            <f:render partial="helpPanel" arguments="{_all}"/>
+            <!-- Overview -->
+            <div id="eidlogin-settings-wizard-panel-1" class="container panel hidden">
+            <h3><f:translate id="be_tpl_wiz_head_5"/></h3>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            <f:translate id="be_tpl_wiz_txt_30"/><b>eID</b><f:translate id="be_tpl_wiz_txt_31"/>
+                        </p>
+                        </br>
+                        <p>
+                            <f:translate id="be_tpl_wiz_txt_32"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ol class="overview">
+                            <li>
+                                <b><f:translate id="be_tpl_wiz_txt_33"/></b>
+                                </br>
+                                <f:translate id="be_tpl_wiz_txt_34"/>
+                                <b>Identity Provider</b>
+                                <f:translate id="be_tpl_wiz_txt_35"/>
+                                <b>IdP</b>
+                                <f:translate id="be_tpl_wiz_txt_36"/>
+                                <a target="_blank" href="{skid_url}">SkIDentity</a>
+                                <f:translate id="be_tpl_wiz_txt_37"/>
+                            </li>
+                            <li>
+                                <b><f:translate id="be_tpl_wiz_txt_38"/></b>
+                                <br/>
+                                <f:translate id="be_tpl_wiz_txt_39"/>
+                                <b>Service Provider</b><f:translate id="be_tpl_wiz_txt_40"/>
+                            </li>
+                            <li>
+                                <b><f:translate id="be_tpl_wiz_txt_41"/></b></br><f:translate id="be_tpl_wiz_txt_42"/>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                        <p class="right"><button id="eidlogin-settings-button-select-skid" data-panel="3"><f:translate id="be_tpl_wiz_txt_43"/></button></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <p class="left">
+                            <f:translate id="be_tpl_wiz_txt_44"/>
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <p class="right"><button id="eidlogin-settings-button-next-2" data-panel="2"><f:translate id="be_tpl_wiz_txt_45"/></button></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Select IdP -->
+            <form id="eidlogin-settings-form-wizard" action="#" method="post">
+                <input type="hidden" name="site_root_page_id" value="{site_root_page_id}"/>
+                <input type="hidden" name="activated" value="0"/>
+                <div id="eidlogin-settings-wizard-panel-2" class="panel hidden">
+                    <h3><f:translate id="be_tpl_wiz_head_6"/></h3>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                <f:translate id="be_tpl_wiz_txt_46"/>
+                            </p>
+                            <p>
+                                <f:translate id="be_tpl_wiz_txt_47"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_metadata_url"><f:translate id="be_tpl_wiz_lbl_1"/></label><br/>
+                            <input class="form-control" id="eidlogin-settings-form-wizard-idp_metadata_url" name="idp_metadata_url" value="{idp_metadata_url}" type="text" required/>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p>
+                                <f:translate id="be_tpl_wiz_txt_48"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-sp_entity_id">Service Provider EntityID *</label><br/>
+                            <input class="form-control" id="eidlogin-settings-form-wizard-sp_entity_id" name="sp_entity_id" value="{settings.sp_entity_id}" type="text" required/>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p>
+                                <f:translate id="be_tpl_wiz_txt_49"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="eidlogin-settings-wizard-row-sp_enforce_enc" class="row">
+                        <div class="col-6">
+                            <input id="eidlogin-settings-form-wizard-sp_enforce_enc" name="sp_enforce_enc" type="checkbox" <f:if condition="{settings.sp_enforce_enc}==1"><f:then>checked</f:then></f:if>/>
+                            <label for="eidlogin-settings-form-wizard-sp_enforce_enc"><f:translate id="be_tpl_wiz_lbl_2"/></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="left"><button id="eidlogin-settings-button-back-1" data-panel="1"><f:translate id="be_tpl_wiz_txt_back"/></button></p>
+                        </div>
+                        <div class="col-8">
+                                <p class="center"><button id="eidlogin-settings-button-toggleidp"><f:translate key="be_js_txt_show_idp"/></button></p>
+                        </div>
+                        <div class="col-2">
+                            <p class="right"><button id="eidlogin-settings-button-next-3" data-panel="3"><f:translate id="be_tpl_wiz_txt_next"/></button></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Advanced IdP Settings -->
+                <div id="eidlogin-settings-wizard-panel-idp_settings" class="panel hidden">
+                    <h3><f:translate id="be_tpl_wiz_head_7"/></h3>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_entity_id">Identity Provider EntityID *</label><br/>
+                            <input class="form-control" id="eidlogin-settings-form-wizard-idp_entity_id" name="idp_entity_id" value="" type="text" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_sso_url">Identity Provider Single Sign-On URL *</label><br/>
+                            <input class="form-control" id="eidlogin-settings-form-wizard-idp_sso_url" name="idp_sso_url" value="" type="text" required/>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p><f:translate id="be_tpl_wiz_txt_50"/></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_cert_sign"><f:translate id="be_tpl_wiz_lbl_3"/> *</label><br/>
+                            <textarea class="form-control" id="eidlogin-settings-form-wizard-idp_cert_sign" name="idp_cert_sign" required></textarea>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p><f:translate id="be_tpl_wiz_txt_51"/></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_cert_enc"><f:translate id="be_tpl_wiz_lbl_4"/></label><br/>
+                            <textarea class="form-control" id="eidlogin-settings-form-wizard-idp_cert_enc" name="idp_cert_enc"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p><f:translate id="be_tpl_wiz_txt_52"/></p>
+                        </div>
+                    </div>
+                    <div id="eidlogin-settings-wizard-row-idp_ext_tr03130" class="row">
+                        <div class="col-6">
+                            <label for="eidlogin-settings-form-wizard-idp_ext_tr03130"><f:translate id="be_tpl_wiz_lbl_5"/></label><br/>
+                            <textarea class="form-control" id="eidlogin-settings-form-wizard-idp_ext_tr03130" name="idp_ext_tr03130" placeholder="{tr03130Placeholder}"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <br/>
+                            <p><f:translate id="be_tpl_wiz_txt_53"/><a target="_blank" href="{tr03130URL}">BSI TR-03130</a><f:translate id="be_tpl_wiz_txt_54"/></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- Configure IdP -->
+            <div id="eidlogin-settings-wizard-panel-3" class="panel hidden">
+                <h3><f:translate id="be_tpl_wiz_head_8"/></h3>
+                <div class="row">
+                    <div class="col-12">
+                        <p><f:translate id="be_tpl_wiz_txt_55"/></p>
+                    </div>
+                </div>
+                <div id="eidlogin-settings-skid-row" class="row">
+                    <div class="col-6" >
+                        <p class="left"><f:translate id="be_tpl_wiz_txt_56"/></p>
+                    </div>
+                    <div class="col-6">
+                        <p class="center"><button id="eidlogin-settings-button-skid"><f:translate id="be_tpl_wiz_txt_57"/></button></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Service Provider EntityID
+                    </div>
+                    <div class="col-6">
+                        <b><pre id="eidlogin-settings-wizard-display-sp_entity_id"></pre></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Service Provider Assertion Consumer URL (ACS URL)
+                    </div>
+                    <div class="col-6">
+                        <b><pre id="eidlogin-settings-wizard-display-sp_acs_url"></pre></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Service Provider Metadata URL
+                    </div>
+                    <div class="col-6">
+                        <b><pre id="eidlogin-settings-wizard-display-sp_meta_url">{sp_meta_url}</pre></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <p class="left"><button id="eidlogin-settings-button-back-2" data-panel="2"><f:translate id="be_tpl_wiz_txt_back"/></button></p>
+                    </div>
+                    <div class="col-8">
+                        <p class="center"><button id="eidlogin-settings-button-togglesp"><f:translate id="be_js_txt_show_sp"/></button></p>
+                    </div>
+                    <div class="col-2">
+                        <p class="right"><button id="eidlogin-settings-button-next-4" data-panel="4"><f:translate id="be_tpl_wiz_txt_next"/></button></p>
+                    </div>
+                </div>
+            </div>
+            <div id="eidlogin-settings-wizard-panel-register-sp" class="panel hidden">
+                <h3><f:translate id="be_tpl_wiz_head_9"/></h3>
+                <p><f:translate id="be_tpl_wiz_txt_58"/>&nbsp;{sp_meta_url}</p>
+                <div class="row">
+                    <div class="col-12">
+                        <pre lang="xml" id="eidlogin-settings-wizard-panel-register-sp-metadata"></pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Finish -->
+            <div id="eidlogin-settings-wizard-panel-4" class="panel hidden">
+                <h3><f:translate id="be_tpl_wiz_head_10"/></h3>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            <f:translate id="be_tpl_wiz_txt_59"/>
+                            <a target="_blank" href="https://www.openecard.org/">Open eCard-App</a>
+                            <f:translate id="be_tpl_wiz_txt_60"/>
+                            <a target="_blank" href="https://www.ausweisapp.bund.de/ausweisapp2/">AusweisApp2</a>).
+                            <f:translate id="be_tpl_wiz_txt_61"/>
+                        </p>   
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            <f:translate id="be_tpl_wiz_txt_62"/>&nbsp;<a target="_blank" href="{base_url}">Frontend</a>&nbsp;<f:translate id="be_tpl_wiz_txt_62a"/>
+                        </p>
+                        <br/>
+                        <p>
+                            <b><f:translate id="be_tpl_wiz_txt_63"/></b>
+                            <f:translate id="be_tpl_wiz_txt_64"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <p class="left"><button id="eidlogin-settings-button-back-3" data-panel="3"><f:translate id="be_tpl_wiz_txt_back"/></button></p>
+                    </div>
+                    <div class="col-7"></div>
+                    <div class="col-4">
+                        <p class="right"><button id="eidlogin-settings-button-finish"><f:translate id="be_tpl_wiz_txt_65"/></button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="eidlogin-settings-manual" class="hidden">
+            <input id="eidlogin-settings-input-activated" name="activated" type="checkbox" <f:if condition="{settings.activated}==1"><f:then>checked</f:then></f:if>></input>
+            <label id="eidlogin-settings-label-activated" for="eidlogin-settings-input-activated"><f:translate id="be_tpl_wiz_lbl_6"/></label>
+            <p for="eidlogin-settings-activated"><f:translate id="be_tpl_wiz_txt_66"/></p>
+            <br/>
+            <p><f:translate id="be_tpl_wiz_txt_67"/></p>
+            <form id="eidlogin-settings-form-manual">
+                <div id="eidlogin-settings-manual-sp">
+                    <input type="hidden" name="site_root_page_id" value="{site_root_page_id}"/>
+                    <h3><f:translate id="be_tpl_wiz_head_11"/></h3>
+                    <input id="eidlogin-settings-form-manual-eid_delete" name="eid_delete" value="false" type="hidden"/>
+                    <label for="eidlogin-settings-form-manual-sp_entity_id">Service Provider EntityID *</label><br/>
+                    <p for="eidlogin-settings-form-manual-sp_entity_id"><f:translate id="be_tpl_wiz_txt_68"/></p>
+                    <input class="form-control" id="eidlogin-settings-form-manual-sp_entity_id" name="sp_entity_id" value="{settings.sp_entity_id}" type="text" required/>
+                    <label for="eidlogin-settings-form-manual-sp_acs_url">Assertion Consumer URL</label><br/>
+                    <p for="eidlogin-settings-form-manual-sp_acs_url"><f:translate id="be_tpl_wiz_txt_69"/></p>
+                    <input class="form-control" id="eidlogin-settings-form-manual-sp_acs_url" name="sp_acs_url" value="{sp_acs_url}" type="text" disabled/>
+                    <label for="eidlogin-settings-form-manual-sp_meta_url"><f:translate id="be_tpl_wiz_lbl_7"/></label><br/>
+                    <p for="eidlogin-settings-form-manual-sp_meta_url"><f:translate id="be_tpl_wiz_txt_70"/></p>
+                    <input class="form-control" id="eidlogin-settings-form-manual-sp_meta_url" name="sp_meta_url" value="{sp_meta_url}" type="text" disabled/>
+                    <div id="eidlogin-settings-manual-div-sp_enforce_enc">
+                        <input id="eidlogin-settings-form-manual-sp_enforce_enc" name="sp_enforce_enc" type="checkbox"<f:if condition="{settings.sp_enforce_enc}==1"><f:then> checked</f:then></f:if>></input>
+                        <label for="eidlogin-settings-form-manual-sp_enforce_enc"><f:translate id="be_tpl_wiz_lbl_8"/></label>
+                    </div>
+                </div>
+                <div id="eidlogin-settings-manual-idp">
+                    <h3><f:translate id="be_tpl_wiz_head_12"/></h3>
+                    <label for="eidlogin-settings-form-manual-idp_entity_id"><f:translate id="be_tpl_wiz_lbl_9"/></label><br/>
+                    <input class="form-control" id="eidlogin-settings-form-manual-idp_entity_id" name="idp_entity_id" value="{settings.idp_entity_id}" type="text" required/>
+                    <label for="eidlogin-settings-form-manual-idp_sso_url">Identity Provider Single Sign-On URL *</label><br/>
+                    <p for="eidlogin-settings-form-manual-idp_sso_url"><f:translate id="be_tpl_wiz_txt_71"/></p>
+                    <input class="form-control" id="eidlogin-settings-form-manual-idp_sso_url" name="idp_sso_url" value="{settings.idp_sso_url}" type="text" required/>
+                    <label for="eidlogin-settings-form-manual-idp_cert_sign"><f:translate id="be_tpl_wiz_lbl_10"/></label><br/>
+                    <p for="eidlogin-settings-form-manual-idp_cert_sign"><f:translate id="be_tpl_wiz_txt_72"/></p>
+                    <textarea class="form-control" id="eidlogin-settings-form-manual-idp_cert_sign" name="idp_cert_sign" required>{settings.idp_cert_sign}</textarea>
+                    <label for="eidlogin-settings-form-manual-idp_cert_enc"><f:translate id="be_tpl_wiz_lbl_11"/></label><br/>
+                    <p for="eidlogin-settings-form-manual-idp_cert_enc"><f:translate id="be_tpl_wiz_txt_73"/></p>
+                    <textarea class="form-control" id="eidlogin-settings-form-manual-idp_cert_enc" name="idp_cert_enc">{settings.idp_cert_enc}</textarea>
+                    <label for="eidlogin-settings-form-manual-idp_ext_tr03130"><f:translate id="be_tpl_wiz_lbl_12"/></label><br/>
+                    <p for="eidlogin-settings-form-manual-idp_ext_tr03130"><f:translate id="be_tpl_wiz_txt_74"/><a target="_blank" href="{tr03130URL}">BSI TR-03130</a><f:translate id="be_tpl_wiz_txt_75"/></p>
+                    <textarea class="form-control" id="eidlogin-settings-form-manual-idp_ext_tr03130" name="idp_ext_tr03130" placeholder="{tr03130Placeholder}">{settings.idp_ext_tr03130}</textarea>
+                </div>
+                <br/>
+                <button id="eidlogin-settings-button-manual-save"><f:translate id="be_tpl_wiz_txt_save"/></button>
+                <button id="eidlogin-settings-button-reset"><f:translate id="be_tpl_wiz_txt_reset"/></button>
+            </form>
+            <div id="eidlogin-settings-manual-div-rollover">
+                <h3><f:translate id="be_tpl_wiz_head_13"/></h3>
+                <f:be.infobox state="1">
+                    <f:translate id="be_tpl_wiz_txt_76"/>{act-cert_validdays}<f:translate id="be_tpl_wiz_txt_77"/>
+                </f:be.infobox>
+                <h4><f:translate id="be_tpl_wiz_head_14"/></h4>
+                <div class="row">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-5">
+                        <f:translate id="be_tpl_wiz_txt_78"/>
+                    </div>
+                    <div class="col-5">
+                        <f:translate id="be_tpl_wiz_txt_79"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <f:translate id="be_tpl_wiz_txt_80"/>
+                    </div>
+                    <div id="eidlogin-settings-manual-div-cert-act" class="col-5">
+                        ... {act-cert}
+                    </div>
+                    <div id="eidlogin-settings-manual-div-cert-new" class="col-5">
+                        <f:if condition="{new_cert_present}==1"><f:then>{new-cert}</f:then><f:else><f:translate id="be_js_txt_nocert"/></f:else></f:if>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <f:translate id="be_tpl_wiz_txt_81"/>
+                    </div>
+                    <div id="eidlogin-settings-manual-div-cert-act-enc" class="col-5">
+                        ... {act-cert-enc}
+                    </div>
+                    <div id="eidlogin-settings-manual-div-cert-new-enc" class="col-5">
+                        <f:if condition="{new_cert_present}==1"><f:then>{new-cert-enc}</f:then><f:else><f:translate id="be_js_txt_nocert"/></f:else></f:if>
+                    </div>
+                </div>
+                <h4><f:translate id="be_tpl_wiz_head_15"/></h4>
+                <h5><f:translate id="be_tpl_wiz_head_16"/></h5>
+                <p>
+                    <f:translate id="be_tpl_wiz_txt_82"/>
+                    <i><f:translate id="be_tpl_wiz_txt_83"/></i>&nbsp;
+                    <f:translate id="be_tpl_wiz_txt_84"/>
+                </p>
+                <p>
+                    <f:translate id="be_tpl_wiz_txt_85"/>
+                </p>
+                <button id="eidlogin-settings-button-rollover-prepare"><f:translate id="be_tpl_wiz_txt_86"/></button>
+                <h5><f:translate id="be_tpl_wiz_head_17"/></h5>
+                <p>
+                    <f:translate id="be_tpl_wiz_txt_87"/>
+                </p>
+                <f:be.infobox state="1">
+                    <f:translate id="be_tpl_wiz_txt_88"/>
+                </f:be.infobox>
+                <button disabled id="eidlogin-settings-button-rollover-execute"><f:translate id="be_tpl_wiz_txt_89"/></button>
+                <span id="eidlogin-settings-span-rollover-execute">
+                    <f:be.infobox state="1">
+                        <f:translate id="be_tpl_wiz_txt_90"/>
+                    </f:be.infobox>
+                </span>
+            </div>
+        </div>
+    </div>
+</html>

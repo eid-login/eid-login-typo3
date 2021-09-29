@@ -1,0 +1,114 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:be.pageRenderer pageTitle="eidlogin-settings" 
+        includeJsFiles="{0: '{f:uri.resource(path:\'JavaScript/eidlogin-backend-index.js\')}' }"
+        includeCssFiles="{0: '{f:uri.resource(path:\'Css/eidlogin-simplegrid.css\')}', 1: '{f:uri.resource(path:\'Css/eidlogin-backend.css\')}' }"
+    />
+    <div id="eidlogin-settings-spinner">
+        <f:image src="EXT:eidlogin/Resources/Public/Images/loading-dark.gif" alt="spinner" />
+    </div>
+    <div id="eidlogin-settings">
+        <span id="eidlogin-settings-datasrc" hidden=true" data-tasks_present="{tasks_present}" data-default_mail_from_address_present="{default_mail_from_address_present}"></span>
+        <h1>eID-Login - <f:translate key="be_tpl_intro"/></h1>
+        <div id="eidlogin-settings-notls" class="hidden eidlogin-err">
+            <p><f:translate key="be_tpl_notls"/></p>
+        </div>
+        <div id="eidlogin-settings-missingtask" class="hidden eidlogin-err">
+            <p><f:translate key="be_tpl_missingtask"/></p>
+        </div>
+        <div id="eidlogin-settings-missingdefaultmailfromaddress" class="hidden eidlogin-err">
+            <p><f:translate key="be_tpl_missingdefaultmailfromaddress"/></p>
+        </div>
+        <div id="eidlogin-settings-wizard">
+            <div id="eidlogin-settings-wizard-steps">
+                <button id="eidlogin-settings-button-help" data-help="help" class="step">?</button>
+            </div>
+            <!-- Help/Info -->
+            <f:render partial="helpPanel" arguments="{_all}"/>
+            <!-- Index -->
+            <div id="eidlogin-settings-index-panel" class="container panel hidden">
+                <p>
+                    <f:translate key="be_tpl_index_1"/>&nbsp;<b>(eID)</b>.&nbsp;<f:translate key="be_tpl_index_2"/>
+                </p>
+                <br/>
+                <p>
+                    <f:translate key="be_tpl_index_3"/>
+                    <ul>
+                        <li><f:translate key="be_tpl_index_4"/></li>
+                        <li><f:translate key="be_tpl_index_5"/></li>
+                        <li><f:translate key="be_tpl_index_6"/></li>
+                    </ul>
+                </p>
+                <br/>
+                <f:if condition="{site_infos -> f:count()} == 0">
+                    <f:then>
+                        <div id="eidlogin-settings-nosite" class="eidlogin-err">
+                            <p>
+                                <f:translate key="be_tpl_index_nosite"/>
+                            </p>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <table id="eidlogin-settings-matrix">
+                            <tr>
+                                <th><f:translate key="be_tpl_index_th_1"/></th>
+                                <th><f:translate key="be_tpl_index_th_2"/></th>
+                                <th><f:translate key="be_tpl_index_th_3"/></th>
+                                <th><f:translate key="be_tpl_index_th_4"/></th>
+                                <th><f:translate key="be_tpl_index_th_5"/></th>
+                                <th></th>
+                                <th><f:translate key="be_tpl_index_th_6"/></th>
+                                <f:for each="{site_infos}" as="site_info">
+                                    <tr>
+                                        <td>{site_info.site.identifier}</td>
+                                        <td>
+                                            <f:if condition="{site_info.samlpageid}!=0">
+                                                <f:then><span class="eidlogin-scs"><f:translate key="be_tpl_index_yes"/></span></f:then>
+                                                <f:else><span class="eidlogin-err"><f:translate key="be_tpl_index_no"/></span></f:else>
+                                            </f:if>
+                                        </td>
+                                        <td>
+                                            <f:if condition="{site_info.setuplogin}==1">
+                                                <f:then><span class="eidlogin-scs"><f:translate key="be_tpl_index_yes"/></span></f:then>
+                                                <f:else><span class="eidlogin-err"><f:translate key="be_tpl_index_no"/></span></f:else>
+                                            </f:if>
+                                        </td>
+                                        <td>
+                                            <f:if condition="{site_info.setupsettings}==1">
+                                                <f:then><span class="eidlogin-scs"><f:translate key="be_tpl_index_yes"/></span></f:then>
+                                                <f:else><span class="eidlogin-err"><f:translate key="be_tpl_index_no"/></span></f:else>
+                                            </f:if>
+                                        </td>
+                                        <td>
+                                            <f:if condition="{site_info.userpageids->f:count()}!=0">
+                                                <f:then><span class="eidlogin-scs"><f:translate key="be_tpl_index_yes"/></span></f:then>
+                                                <f:else><span class="eidlogin-err"><f:translate key="be_tpl_index_no"/></span></f:else>
+                                            </f:if>
+                                        </td>
+                                        <td>
+                                            <f:if condition="{site_info.samlpageid}!=0 && {site_info.setuplogin}==1 && {site_info.setupsettings}==1 && {site_info.userpageids->f:count()}!=0">
+                                                <f:then>
+                                                    <button id="eidlogin-opensettings_{site_info.site.identifier}" data-open_settings_link="{site_links.{site_info.site.rootpageid}}">
+                                                        <f:translate key="be_tpl_index_settings"/>
+                                                    </button>
+                                                </f:then>
+                                                <f:else>
+                                                    <f:translate key="be_tpl_index_setup_missing"/>
+                                                </f:else>
+                                            </f:if>
+                                        </td>
+                                        <td>
+                                            <f:if condition="{site_info.configured}==1">
+                                                <f:then><span class="eidlogin-scs"><f:translate key="be_tpl_index_yes"/></span></f:then>
+                                                <f:else><span class="eidlogin-err"><f:translate key="be_tpl_index_no"/></span></f:else>
+                                            </f:if>
+                                        </td>
+                                    </tr>
+                                </f:for>
+                            </tr>
+                        </table>
+                    </f:else>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</html>

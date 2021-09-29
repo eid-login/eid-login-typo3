@@ -1,0 +1,2 @@
+# having a dummy key here ensures the creation of an extension configuration
+dummy=

@@ -1,0 +1,32 @@
+actor: AcceptanceTester
+modules:
+    enabled:
+        # the local module in ./Support/Helper/Acceptance
+        - \Helper\Acceptance
+        # for TYPO3 specifica
+        - \TYPO3\TestingFramework\Core\Acceptance\Helper\Login
+        # for running shell commands
+        - Cli
+        # db access
+        - Db:
+            # port etc must match the values used in docker compose file of the projects stack!
+            dsn: 'mysql:host=127.0.0.1;port=3311;dbname=p396typo3db'
+            user: 'p396typo3user'
+            password: 'p396typo3pass'
+            populate: true # load dump before all tests
+            cleanup: false # drop tables before test
+            dump: '_data/clear_eid_from_db.sql'
+        # selenium webdriver usage
+        - WebDriver:
+            url: https://typo3.p396.de
+            wait: 5
+            pageload_timeout: 5
+            debug_log_entries: 200
+            browser: chrome
+            capabilities:
+                chromeOptions:
+                    args: ["--ignore-certificate-errors", "--disable-gpu"]
+step_decorators:
+    - Codeception\Step\ConditionalAssertion
+    - Codeception\Step\TryTo
+    - Codeception\Step\Retry

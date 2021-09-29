@@ -1,0 +1,15 @@
+// TypoSript setup for a xml only SAML Metadata page
+page = PAGE
+page {
+  config {
+    disablePrefixComment = 1
+    disableAllHeaderCode = 1
+    xhtml_cleaning = none
+    admPanel = 0
+    debug = 0
+    metaCharset = utf-8
+    additionalHeaders.10.header = Content-type:application/xml    
+  }
+  10 =< tt_content.list.20.eidlogin_saml
+  10.format = xml
+}

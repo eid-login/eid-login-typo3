@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Ecsec\Eidlogin\:
+    resource: '../Classes/*'
+
+  Ecsec\Eidlogin\Command\CertificateRolloverCommand:
+    tags:
+      - name: 'console.command'
+        command: 'eidlogin:certificate'
+
+  Ecsec\Eidlogin\Command\CleanDbCommand:
+    tags:
+      - name: 'console.command'
+        command: 'eidlogin:cleandb'
+
+  Ecsec\Eidlogin\EventListener\LoginConfirmedEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'eidlogin.loginConfirmedEventListener'
+        event: TYPO3\CMS\FrontendLogin\Event\LoginConfirmedEvent
+
+  Ecsec\Eidlogin\EventListener\PasswordChangeEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'eidlogin.passwordChangeEventListener'
+        event: TYPO3\CMS\FrontendLogin\Event\PasswordChangeEvent

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
+	xmlns:att="http://www.skidentity.de/att"
+	xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+	targetNamespace="http://www.skidentity.de/att"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="1.0.0">
+
+	<import namespace="urn:oasis:names:tc:dss:1.0:core:schema"
+		schemaLocation="oasis-dss-core-schema-v1.0-os.xsd" />
+	<import namespace="http://www.w3.org/XML/1998/namespace"
+		schemaLocation="xml.xsd" />
+	<import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+		schemaLocation="saml-schema-assertion-2.0.xsd" />
+
+	<!-- =============================== -->
+	<!--        Version / Date           -->
+	<!-- =============================== -->
+	<!--            09.11.2015           -->
+	<!-- =============================== -->
+
+	<!-- =============================== -->
+	<!--            Attribute            -->
+	<!-- =============================== -->
+
+	<element name="Attribute">
+		<complexType>
+			<sequence>
+				<element name="ID" type="ID" />
+				<element name="Description" maxOccurs="unbounded" minOccurs="0">
+					<complexType mixed="true">
+						<sequence>
+							<any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+						</sequence>
+						<attribute ref="xml:lang" use="required" />
+					</complexType>
+				</element>
+
+				<element name="Example" maxOccurs="unbounded" minOccurs="0">
+					<complexType mixed="true">
+						<sequence>
+							<any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+						</sequence>
+					</complexType>
+				</element>
+
+				<element name="InputFormat" type="token" maxOccurs="1"	minOccurs="0" />
+
+				<element name="OutputFormat" type="token" />
+
+				<element name="URI" type="anyURI" maxOccurs="unbounded"
+					minOccurs="0" />
+
+				<element name="FriendlyName" 
+					type="dss:InternationalStringType" maxOccurs="unbounded"
+					minOccurs="0" />
+			</sequence>
+		</complexType>
+	</element>
+
+
+	<!-- =============================== -->
+	<!--            Attributes           -->
+	<!-- =============================== -->
+
+
+	<element name="Attributes">
+		<complexType>
+			<sequence>
+				<element ref="att:Attribute"
+					maxOccurs="unbounded" minOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+
+
+	<!-- =============================== -->
+	<!--            AttributeType        -->
+	<!-- =============================== -->
+
+	<!--
+		This type is only here for definition purposes.
+		It must not be used instead of SAML attributes as it breaks the schema validation.
+	-->
+	<!--
+	<complexType name="AttributeType">
+		<annotation>
+			<documentation>
+				Extension of SAML2's AttributeType by attributes to carry
+				information about the origin of an Attribute.
+				To be used in SAML2 AttributeStatements.
+				Example of an AttributeStatement containing the Attribute
+				FirstName originating from a German eID:
+				<saml:AttributeStatement xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+					<saml:Attribute
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xmlns:att="http://www.skidentity.de/att"
+					 	xsi:type="att:AttributeType"
+						Name="FirstName"
+						OriginIDType="http://bsi.bund.de/cif/npa.xml">
+						<saml:AttributeValue
+							xmlns:xs="http://www.w3.org/2001/XMLSchema"
+							xsi:type="xs:string">John</saml:AttributeValue>
+					</saml:Attribute>
+				</saml:AttributeStatement>
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="saml:AttributeType">
+				<attribute name="OriginIDType" type="anyURI" use="required" form="qualified"/>	
+				<attribute name="OriginIDAuthProtocol" type="anyURI" use="optional" form="qualified"/>	
+				<attribute name="OriginIDIssuer" type="normalizedString" use="optional" form="qualified"/>	
+				<attribute name="OriginIDValidUntil" type="dateTime" use="optional" form="qualified"/>	
+				<attribute name="VerifiedAt" type="dateTime" use="optional" form="qualified"/>	
+			</extension>
+		</complexContent>
+	</complexType>
+	-->
+
+
+	<!-- =============================== -->
+	<!--      Attribute Value Types      -->
+	<!-- =============================== -->
+
+
+	<complexType name="PhoneNumberType">
+		<simpleContent>
+			<extension base="anyURI">
+				<attribute name="Type" type="normalizedString" use="optional" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="DocumentOrSignatureObjectType">
+		<choice>
+			<element ref="dss:Document" />
+			<element ref="dss:SignatureObject" />
+		</choice>
+	</complexType>
+
+	<complexType name="AgeVerificationRequestType">
+		<annotation>
+			<documentation>
+				Attribute value type to request age verification for the given reference age.
+				The optional attribute TimeZone may be used to specify the TimeZone for the
+				age verification.
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="positiveInteger">
+				<attribute name="TimeZone" type="normalizedString" use="optional" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="AgeVerificationResultType">
+		<simpleContent>
+			<extension base="boolean">
+				<attribute name="ReferenceValue" type="positiveInteger" use="required" />
+				<attribute name="TimeZone" type="normalizedString" use="optional" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="HashValueType">
+		<simpleContent>
+			<extension base="hexBinary">
+				<attribute name="HashAlgorithm" type="anyURI" use="required" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="PublicCredentialDataType">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="CredentialType" type="anyURI" use="required" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+</schema>
