@@ -22,13 +22,13 @@
         }
     },
     "require": {
-        "typo3/cms-core": ">=10.4.21 <11.0.0",
-        "typo3/cms-backend": ">=10.4.21 <11.0.0",
-        "typo3/cms-extbase": ">=10.4.21 <11.0.0",
-        "typo3/cms-felogin": ">=10.4.21 <11.0.0",
-        "typo3/cms-fluid": ">=10.4.21 <11.0.0",
-        "typo3/cms-frontend": ">=10.4.21 <11.0.0",
-        "typo3/cms-scheduler": ">=10.4.21 <11.0.0"
+        "typo3/cms-core": "~10.4.21 || ~11.4",
+        "typo3/cms-backend": "~0.4.21 || ~11.4",
+        "typo3/cms-extbase": "~10.4.21 || ~11.4",
+        "typo3/cms-felogin": "~10.4.21 || ~11.4",
+        "typo3/cms-fluid": "~10.4.21 || ~11.4",
+        "typo3/cms-frontend": "~10.4.21 || ~11.4",
+        "typo3/cms-scheduler": "~10.4.21 || ~11.4"
     },
     "require-dev": {
         "eid-login/php-saml": "1.0.0",
