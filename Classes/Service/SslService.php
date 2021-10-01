@@ -9,6 +9,7 @@
 namespace Ecsec\Eidlogin\Service;
 
 use Ecsec\Eidlogin\Dep\OneLogin\Saml2\Utils;
+use Ecsec\Eidlogin\Util\Typo3VersionUtil;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -252,20 +253,28 @@ class SslService implements LoggerAwareInterface
             throw new \Exception('openssl error: failed to export encryption cert');
         }
         // save as act or new
-        $configKeyKey = $siteRootPageId . '/sp_key_act';
-        $configKeyCert = $siteRootPageId . '/sp_cert_act';
-        $configKeyKeyEnc = $siteRootPageId . '/sp_key_act_enc';
-        $configKeyCertEnc = $siteRootPageId . '/sp_cert_act_enc';
+        $currentExtConfig = $this->config->get('eidlogin');
+        $currentSiteConfig = $currentExtConfig[$siteRootPageId];
+        $configKeyKey = 'sp_key_act';
+        $configKeyCert = 'sp_cert_act';
+        $configKeyKeyEnc = 'sp_key_act_enc';
+        $configKeyCertEnc = 'sp_cert_act_enc';
         if ($this->checkActCertPresent($siteRootPageId)) {
-            $configKeyKey = $siteRootPageId . '/sp_key_new';
-            $configKeyCert = $siteRootPageId . '/sp_cert_new';
-            $configKeyKeyEnc = $siteRootPageId . '/sp_key_new_enc';
-            $configKeyCertEnc = $siteRootPageId . '/sp_cert_new_enc';
+            $configKeyKey = 'sp_key_new';
+            $configKeyCert = 'sp_cert_new';
+            $configKeyKeyEnc = 'sp_key_new_enc';
+            $configKeyCertEnc = 'sp_cert_new_enc';
         }
-        $this->config->set('eidlogin', $configKeyKey, $keyStr);
-        $this->config->set('eidlogin', $configKeyCert, $certStr);
-        $this->config->set('eidlogin', $configKeyKeyEnc, $keyStrEnc);
-        $this->config->set('eidlogin', $configKeyCertEnc, $certStrEnc);
+        $currentSiteConfig[$configKeyKey] = $keyStr;
+        $currentSiteConfig[$configKeyCert] = $certStr;
+        $currentSiteConfig[$configKeyKeyEnc] = $keyStrEnc;
+        $currentSiteConfig[$configKeyCertEnc] = $certStrEnc;
+        $currentExtConfig[$siteRootPageId] = $currentSiteConfig;
+        if (Typo3VersionUtil::isVersion10()) {
+            $this->config->set('eidlogin', '', $currentExtConfig);
+        } else {
+            $this->config->set('eidlogin', $currentExtConfig);
+        }
 
         return;
     }
@@ -350,18 +359,24 @@ class SslService implements LoggerAwareInterface
         if (''===$certNewEnc) {
             throw new \Exception('no new cert found in eID-Login config for siteRootPageId ' . $siteRootPageId);
         }
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_old', $keyAct);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_old', $certAct);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_old_enc', $keyActEnc);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_old_enc', $certActEnc);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_act', $keyNew);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_act', $certNew);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_act_enc', $keyNewEnc);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_act_enc', $certNewEnc);
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_new', '');
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_new', '');
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_key_new_enc', '');
-        $this->config->set('eidlogin', $siteRootPageId . '/sp_cert_new_enc', '');
+        $currentExtConfig = $this->config->get('eidlogin');
+        $currentExtConfig[$siteRootPageId]['sp_key_old'] = $keyAct;
+        $currentExtConfig[$siteRootPageId]['sp_cert_old'] = $certAct;
+        $currentExtConfig[$siteRootPageId]['sp_key_old_enc'] = $keyActEnc;
+        $currentExtConfig[$siteRootPageId]['sp_cert_old_enc'] = $certActEnc;
+        $currentExtConfig[$siteRootPageId]['sp_key_act'] = $keyNew;
+        $currentExtConfig[$siteRootPageId]['sp_cert_act'] = $certNew;
+        $currentExtConfig[$siteRootPageId]['sp_key_act_enc'] = $keyNewEnc;
+        $currentExtConfig[$siteRootPageId]['sp_cert_act_enc'] = $certNewEnc;
+        $currentExtConfig[$siteRootPageId]['sp_key_new'] = '';
+        $currentExtConfig[$siteRootPageId]['sp_cert_new'] = '';
+        $currentExtConfig[$siteRootPageId]['sp_key_new_enc'] = '';
+        $currentExtConfig[$siteRootPageId]['sp_cert_new_enc'] = '';
+        if (Typo3VersionUtil::isVersion10()) {
+            $this->config->set('eidlogin', '', $currentExtConfig);
+        } else {
+            $this->config->set('eidlogin', $currentExtConfig);
+        }
 
         return;
     }

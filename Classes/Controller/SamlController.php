@@ -80,7 +80,7 @@ class SamlController extends ActionController implements LoggerAwareInterface
     /**
      * The endpoint giving out SP saml metdata.
      */
-    public function metaAction(): string
+    public function metaAction()
     {
         $this->logger->debug('eidlogin - SamlController - metaAction; enter');
         try {
@@ -93,10 +93,11 @@ class SamlController extends ActionController implements LoggerAwareInterface
             header('Access-Control-Allow-Origin: *', false);
             // yes, we deliver xml
             header('Content-Type: application/xml');
+
             return $meta;
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-            $this->response->setStatus(404);
+            $this->logger->info($e->getMessage());
+            http_response_code(404);
 
             return '';
         }

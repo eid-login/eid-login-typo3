@@ -19,6 +19,7 @@ use Ecsec\Eidlogin\Service\SamlService;
 use Ecsec\Eidlogin\Service\SettingsService;
 use Ecsec\Eidlogin\Service\SiteInfoService;
 use Ecsec\Eidlogin\Service\SslService;
+use Ecsec\Eidlogin\Util\Typo3VersionUtil;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Page\PageRenderer;
@@ -26,11 +27,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-
-// TODO 11
-// use Psr\Http\Message\ResponseInterface;
-// use TYPO3\CMS\Core\Http\JsonResponse;
-// return $this->htmlResponse();
 
 /**
  * Class BackendController
@@ -298,11 +294,10 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
     /**
      * Fetch the metadata from a given metadata URL
      */
-    public function fetchIdpMetaAction(): string
+    public function fetchIdpMetaAction()
     {
         $this->logger->debug('eidlogin - BackendController - showSettingsAction; enter');
-        $this->response->setHeader('Content-Type', 'application/json');
-        $this->response->setStatus(422);
+        $status = 422;
         $data = [
             'status' => 'error',
         ];
@@ -318,24 +313,19 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
                     'idp_entity_id' => $idpMetadata['idp_entity_id'],
                     'idp_sso_url' => $idpMetadata['idp_sso_url'],
                 ];
-                $this->response->setStatus(200);
+                $status = 200;
             } catch (\Exception $e) {
                 $this->logger->debug($e->getMessage());
             }
         }
-        $res = json_encode($data);
-        if (!$res) {
-            throw new \Exception('json_encode failed');
-        }
-        $this->response->setHeader('Content-Type', 'application/json');
 
-        return $res;
+        return $this->buildJsonResponse($data, $status);
     }
 
     /**
      * Save the eID-Login settings
      */
-    public function saveSettingsAction(): string
+    public function saveSettingsAction()
     {
         $this->logger->debug('eidlogin - BackendController - saveSettingsAction; enter');
         $siteRootPageId = $_POST['site_root_page_id'];
@@ -376,19 +366,14 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
                 'message' => $msg
             ];
         }
-        $res = json_encode($data);
-        if (!$res) {
-            throw new \Exception('json_encode failed');
-        }
-        $this->response->setHeader('Content-Type', 'application/json');
 
-        return $res;
+        return $this->buildJsonResponse($data);
     }
 
     /**
      * Toogle the activated state of the eID-Login
      */
-    public function toggleActivatedAction(): string
+    public function toggleActivatedAction()
     {
         $this->logger->debug('eidlogin - BackendController - toggleActivatedAction; enter');
         if (is_null($_GET['site_root_page_id'])) {
@@ -404,19 +389,14 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
             'status' => 'success',
             'message' => $msg
         ];
-        $res = json_encode($data);
-        if (!$res) {
-            throw new \Exception('json_encode failed');
-        }
-        $this->response->setHeader('Content-Type', 'application/json');
 
-        return $res;
+        return $this->buildJsonResponse($data);
     }
 
     /**
      * Reset the settings
      */
-    public function resetSettingsAction(): string
+    public function resetSettingsAction()
     {
         $this->logger->debug('eidlogin - BackendController - resetSettingsAction; enter');
         if (is_null($_GET['site_root_page_id'])) {
@@ -431,19 +411,14 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
             'status' => 'success',
             'message' => $msg
         ];
-        $res = json_encode($data);
-        if (!$res) {
-            throw new \Exception('json_encode failed');
-        }
-        $this->response->setHeader('Content-Type', 'application/json');
 
-        return $res;
+        return $this->buildJsonResponse($data);
     }
 
     /**
     * Prepare a SAML certificate rollover.
     */
-    public function prepareRolloverAction(): string
+    public function prepareRolloverAction()
     {
         if (is_null($_GET['site_root_page_id'])) {
             throw new \Exception('misssing parameter site_root_page_id');
@@ -468,19 +443,14 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
                 'status' => 'error',
             ];
         }
-        $res = json_encode($data);
-        if (!$res) {
-            throw new \Exception('json_encode failed');
-        }
-        $this->response->setHeader('Content-Type', 'application/json');
 
-        return $res;
+        return $this->buildJsonResponse($data);
     }
 
     /**
      * Execute a SAML certificate rollover.
      */
-    public function executeRolloverAction(): string
+    public function executeRolloverAction()
     {
         if (is_null($_GET['site_root_page_id'])) {
             throw new \Exception('misssing parameter site_root_page_id');
@@ -505,12 +475,36 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
                 'status' => 'error',
             ];
         }
-        $res = json_encode($data);
-        if (!$res) {
+
+        return $this->buildJsonResponse($data);
+    }
+
+    /**
+     * Logic to build a json response
+     *
+     * @param string[] $data The data to return as json
+     * @param int $status The status to set for the response, 200 is default
+     * @return mixed $response mixed to support TYPO3 10 and 11
+     * @throws \Exception If json conversion fails
+     */
+    private function buildJsonResponse(array $data=null, int $status=200)
+    {
+        $json = json_encode($data);
+        if (!$json) {
             throw new \Exception('json_encode failed');
         }
-        $this->response->setHeader('Content-Type', 'application/json');
+        if (Typo3VersionUtil::isVersion10()) {
+            $this->response->setHeader('Content-Type', 'application/json');
+            $this->response->setStatus($status);
 
-        return $res;
+            return $json;
+        }
+        $response = $this->responseFactory
+                ->createResponse()
+                ->withStatus($status)
+                ->withHeader('Content-Type', 'application/json; charset=utf-8');
+        $response->getBody()->write($json);
+
+        return $response;
     }
 }

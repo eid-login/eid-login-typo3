@@ -14,6 +14,7 @@
 namespace Ecsec\Eidlogin\Service;
 
 use Ecsec\Eidlogin\Domain\Repository\FrontendUserRepository;
+use Ecsec\Eidlogin\Util\Typo3VersionUtil;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -160,11 +161,13 @@ class SettingsService implements LoggerAwareInterface
         string $sp_entity_id
     ): array {
         $errors = [];
+        $currentExtConfig = $this->config->get('eidlogin');
+        $currentSiteConfig = array_key_exists($siteRootPageId, $currentExtConfig) ? $currentExtConfig[$siteRootPageId] : [];
         if ($idp_cert_enc !== '') {
             try {
                 $keyLengthValid = $this->sslService->checkCertPubKeyLength($idp_cert_enc);
                 if ($keyLengthValid) {
-                    $this->config->set('eidlogin', $siteRootPageId . '/idp_cert_enc', filter_var($idp_cert_enc, FILTER_SANITIZE_STRIPPED));
+                    $currentSiteConfig['idp_cert_enc'] = filter_var($idp_cert_enc, FILTER_SANITIZE_STRIPPED);
                 } else {
                     $errors[] = $this->l10nUtil->translate('be_msg_err_idp_cert_enc_invalid_key_length', 'eidlogin') . SslService::KEY_LENGTH_LIMIT_LOWER . '.';
                 }
@@ -173,13 +176,13 @@ class SettingsService implements LoggerAwareInterface
                 $errors[] = $this->l10nUtil->translate('be_msg_err_idp_cert_enc_invalid', 'eidlogin');
             }
         } else {
-            $this->config->set('eidlogin', $siteRootPageId . '/idp_cert_enc', '');
+            $currentSiteConfig['idp_cert_enc'] = '';
         }
         if ($idp_cert_sign !== '') {
             try {
                 $keyLengthValid = $this->sslService->checkCertPubKeyLength($idp_cert_sign);
                 if ($keyLengthValid) {
-                    $this->config->set('eidlogin', $siteRootPageId . '/idp_cert_sign', filter_var($idp_cert_sign, FILTER_SANITIZE_STRIPPED));
+                    $currentSiteConfig['idp_cert_sign'] = filter_var($idp_cert_sign, FILTER_SANITIZE_STRIPPED);
                 } else {
                     $errors[] = $this->l10nUtil->translate('be_msg_err_idp_cert_sign_invalid_key_length', 'eidlogin') . SslService::KEY_LENGTH_LIMIT_LOWER . '.';
                 }
@@ -191,7 +194,7 @@ class SettingsService implements LoggerAwareInterface
             $errors[] = $this->l10nUtil->translate('be_msg_err_idp_cert_sign_missing', 'eidlogin');
         }
         if ($idp_entity_id !== '') {
-            $this->config->set('eidlogin', $siteRootPageId . '/idp_entity_id', filter_var($idp_entity_id, FILTER_SANITIZE_STRIPPED));
+            $currentSiteConfig['idp_entity_id'] = filter_var($idp_entity_id, FILTER_SANITIZE_STRIPPED);
         } else {
             $errors[] = $this->l10nUtil->translate('be_msg_err_idp_entityid_missing', 'eidlogin');
         }
@@ -215,22 +218,10 @@ class SettingsService implements LoggerAwareInterface
             if (count($tr03130Errors)>0) {
                 $errors = array_merge($errors, $tr03130Errors);
             } else {
-                $this->config->set('eidlogin', $siteRootPageId . '/idp_ext_tr03130', $idp_ext_tr03130);
+                $currentSiteConfig['idp_ext_tr03130'] = $idp_ext_tr03130;
             }
-            /*
-            if ($idp_cert_enc === '') {
-                $errors[] = $this->l10nUtil->translate('be_msg_err_idp_cert_enc_needed', 'eidlogin');
-            } else {
-                $dom = new \DOMDocument();
-                if (!$dom->loadXML($idp_ext_tr03130)) {
-                    $errors[] = $this->l10nUtil->translate('be_msg_err_idp_tr03130ext_invalid', 'eidlogin');
-                } else {
-                    $this->config->set('eidlogin', $siteRootPageId . '/idp_ext_tr03130', $idp_ext_tr03130);
-                }
-            }
-            */
         } else {
-            $this->config->set('eidlogin', $siteRootPageId . '/idp_ext_tr03130', '');
+            $currentSiteConfig['idp_ext_tr03130'] = '';
         }
         if ($idp_sso_url != '') {
             if (!filter_var($idp_sso_url, FILTER_VALIDATE_URL)) {
@@ -238,20 +229,28 @@ class SettingsService implements LoggerAwareInterface
             } elseif (strpos($idp_sso_url, 'https://')!==0) {
                 $errors[] = $this->l10nUtil->translate('be_msg_err_idp_sso_url_no_https', 'eidlogin');
             } else {
-                $this->config->set('eidlogin', $siteRootPageId . '/idp_sso_url', filter_var($idp_sso_url, FILTER_SANITIZE_STRIPPED));
+                $currentSiteConfig['idp_sso_url'] = filter_var($idp_sso_url, FILTER_SANITIZE_STRIPPED);
             }
         } else {
             $errors[] = $this->l10nUtil->translate('be_msg_err_idp_sso_url_missing', 'eidlogin');
         }
         if (!is_null($sp_enforce_enc)) {
-            $this->config->set('eidlogin', $siteRootPageId . '/sp_enforce_enc', true);
+            $currentSiteConfig['sp_enforce_enc'] = true;
         } else {
-            $this->config->set('eidlogin', $siteRootPageId . '/sp_enforce_enc', false);
+            $currentSiteConfig['sp_enforce_enc'] = false;
         }
         if ($sp_entity_id !== '') {
-            $this->config->set('eidlogin', $siteRootPageId . '/sp_entity_id', filter_var($sp_entity_id, FILTER_SANITIZE_STRIPPED));
+            $currentSiteConfig['sp_entity_id'] = filter_var($sp_entity_id, FILTER_SANITIZE_STRIPPED);
         } else {
             $errors[] = $this->l10nUtil->translate('be_msg_err_sp_entityid_missing', 'eidlogin');
+        }
+        if (count($currentSiteConfig) > 0) {
+            $currentExtConfig[$siteRootPageId] = $currentSiteConfig;
+            if (Typo3VersionUtil::isVersion10()) {
+                $this->config->set('eidlogin', '', $currentExtConfig);
+            } else {
+                $this->config->set('eidlogin', $currentExtConfig);
+            }
         }
 
         return $errors;
@@ -277,7 +276,15 @@ class SettingsService implements LoggerAwareInterface
         if ($activated=='') {
             $activated = false;
         }
-        $this->config->set('eidlogin', $siteRootPageId . '/activated', !$activated);
+        error_log('foo');
+        error_log(print_r($activated, true));
+        $currentExtConfig = $this->config->get('eidlogin');
+        $currentExtConfig[$siteRootPageId]['activated'] = !$activated;
+        if (Typo3VersionUtil::isVersion10()) {
+            $this->config->set('eidlogin', '', $currentExtConfig);
+        } else {
+            $this->config->set('eidlogin', $currentExtConfig);
+        }
 
         return;
     }
@@ -319,6 +326,14 @@ class SettingsService implements LoggerAwareInterface
         if (!is_array($this->config->get('eidlogin', (string)$siteRootPageId))) {
             throw new \Exception('not config for given siteRootPageId ' . $siteRootPageId . ' found');
         }
+        $currentExtConfig = $this->config->get('eidlogin');
+        unset($currentExtConfig[$siteRootPageId]);
+        if (Typo3VersionUtil::isVersion10()) {
+            $this->config->set('eidlogin', '', $currentExtConfig);
+        } else {
+            $this->config->set('eidlogin', $currentExtConfig);
+        }
+        /*
         $settingKeys = [
          'activated',
          'idp_cert_enc',
@@ -344,6 +359,7 @@ class SettingsService implements LoggerAwareInterface
         foreach ($settingKeys as $key) {
             $this->config->set('eidlogin', $siteRootPageId . '/' . $key, '');
         }
+        */
     }
 
     /**
