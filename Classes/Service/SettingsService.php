@@ -213,7 +213,7 @@ class SettingsService implements LoggerAwareInterface
                     $tr03130Errors[] = $this->l10nUtil->translate('be_msg_err_idp_tr03130ext_invalid', 'eidlogin');
                 }
             } catch (\Exception $e) {
-                $tr03130Errors[] = $this->l10n->t('AuthnRequestExtension XML element is no valid XML');
+                $tr03130Errors[] = $this->l10nUtil->translate('be_msg_err_idp_tr03130ext_invalid', 'eidlogin');
             }
             if (count($tr03130Errors)>0) {
                 $errors = array_merge($errors, $tr03130Errors);
