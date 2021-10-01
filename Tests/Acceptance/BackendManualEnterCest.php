@@ -17,7 +17,7 @@ class BackendManualEnterCest
         $I->loginBe();
         $I->openEidLoginBeModule();
         $I->selectOption('EidLoginSiteSelector', 'p396');
-        $I->seeElement('#eidlogin-settings-manual');
+        $I->waitForElement('#eidlogin-settings-manual');
         $I->see('eID-Login - p396', 'h1');
         // test cancel button of save security question
         $I->click('#eidlogin-settings-button-manual-save');

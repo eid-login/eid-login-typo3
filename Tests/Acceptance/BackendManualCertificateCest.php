@@ -17,7 +17,7 @@ class BackendManualCertificateCest
         $I->loginBe();
         $I->openEidLoginBeModule();
         $I->selectOption('EidLoginSiteSelector', 'p396');
-        $I->seeElement('#eidlogin-settings-manual');
+        $I->waitForElement('#eidlogin-settings-manual');
         $I->see('eID-Login - p396', 'h1');
         // check the default state
         $I->see('No new certificate prepared yet.', '#eidlogin-settings-manual-div-cert-new');
