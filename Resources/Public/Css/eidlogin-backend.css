@@ -4,12 +4,6 @@
 .eidlogin-scs {
 	color: green;
 }
-/* #eidlogin-settings-error p {
-	color: red;
-}
-#eidlogin-settings-nosite p {
-	color: red;
-} */
 #eidlogin-settings {
   max-width: 1024px;
 }
@@ -53,7 +47,7 @@
 @media (max-width: 1290px) {
   #eidlogin-settings nav a {
     padding: 7px 0px 7px 0px;
-    width: 160px;
+    width: 190px;
   }
 }
 #eidlogin-settings nav a:after,
