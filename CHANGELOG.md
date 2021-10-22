@@ -6,6 +6,11 @@
 ### Fixed
 ### Security
 
+## 1.2.0 2021-10-25
+### Added
+- Add support for TYPO3 11.5
+### Fixed
+- TYPO3 11 Login Cookie Setting fixed
 ## 1.1.0 2021-10-04
 ### Added
 - Add support for TYPO3 11

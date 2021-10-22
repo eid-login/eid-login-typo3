@@ -662,6 +662,12 @@ class EidService implements LoggerAwareInterface
 
                     return $redirectUrl . '?' . MessageService::PARAM_MSGID . '=' . $msgId;
                 }
+                // we need to set the cookie here for TYPO3 11
+                // as the FrontendUserAuthenticator middleware is using
+                // another instance of FrontendUserAuthentication
+                if ($this->feUserAuth->setCookie !== null) {
+                    header('Set-Cookie: ' . $this->feUserAuth->setCookie->__toString());
+                }
             }
             if ($type === self::TYPE_BE) {
                 throw new \Exception('not yet implemented');

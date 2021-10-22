@@ -22,10 +22,6 @@ use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-// TODO for TYPO3 11
-// use Psr\Http\Message\ResponseInterface;
-// return $this->htmlResponse();
-
 /**
  * Class SamlController
  */
