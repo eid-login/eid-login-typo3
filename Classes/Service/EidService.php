@@ -25,6 +25,7 @@ use Ecsec\Eidlogin\Domain\Repository\ContinueDataRepository;
 use Ecsec\Eidlogin\Domain\Repository\EidRepository;
 use Ecsec\Eidlogin\Domain\Repository\FrontendUserRepository;
 use Ecsec\Eidlogin\Domain\Repository\ResponseDataRepository;
+use Ecsec\Eidlogin\Util\Typo3VersionUtil;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
@@ -662,10 +663,9 @@ class EidService implements LoggerAwareInterface
 
                     return $redirectUrl . '?' . MessageService::PARAM_MSGID . '=' . $msgId;
                 }
-                // we need to set the cookie here for TYPO3 11
-                // as the FrontendUserAuthenticator middleware is using
+                // we need to set the cookie here for TYPO3 11 as the FrontendUserAuthenticator middleware is using
                 // another instance of FrontendUserAuthentication
-                if ($this->feUserAuth->setCookie !== null) {
+                if (Typo3VersionUtil::isVersion11() && $this->feUserAuth->setCookie !== null) {
                     header('Set-Cookie: ' . $this->feUserAuth->setCookie->__toString());
                 }
             }

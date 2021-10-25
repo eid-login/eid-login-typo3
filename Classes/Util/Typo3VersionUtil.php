@@ -27,7 +27,22 @@ class Typo3VersionUtil
      */
     public static function isVersion10(): bool
     {
-        if (VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version()) < 11000000) {
+        $typo3versionAsInt = VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version());
+        if ($typo3versionAsInt > 10000000 && $typo3versionAsInt < 11000000) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check for TYPO3 Version 11
+     *
+     * @return bool $isVersion11 True if TYPO3 is version 11
+     */
+    public static function isVersion11(): bool
+    {
+        $typo3versionAsInt = VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version());
+        if ($typo3versionAsInt > 11000000 && $typo3versionAsInt < 12000000) {
             return true;
         }
         return false;
