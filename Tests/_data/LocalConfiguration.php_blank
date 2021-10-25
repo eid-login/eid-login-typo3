@@ -16,7 +16,7 @@ return [
                 'charset' => 'utf8mb4',
                 'dbname' => 'p396typo3db',
                 'driver' => 'mysqli',
-                'host' => 'p396_typo3_mysql',
+                'host' => 'p396_typo3-11_mysql',
                 'password' => 'p396typo3pass',
                 'port' => 3306,
                 'tableoptions' => [
@@ -103,7 +103,7 @@ return [
         ],
     ],
     'MAIL' => [
-        'defaultMailFromAddress' => 'tobias.assmann@ecsec.de',
+        'defaultMailFromAddress' => 'admin@typo3.p396.de',
         'transport' => 'sendmail',
         'transport_sendmail_command' => '/usr/sbin/sendmail -t -i',
         'transport_smtp_encrypt' => '',

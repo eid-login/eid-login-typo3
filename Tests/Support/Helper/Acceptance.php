@@ -10,7 +10,7 @@ use Ecsec\Eidlogin\Dep\OneLogin\Saml2\IdPMetadataParser;
 
 class Acceptance extends \Codeception\Module
 {
-    const URL_SP_BASE = 'https://typo3.p396.de';
+    const URL_SP_BASE = 'https://typo3-11.p396.de';
     const URL_SP_ACS = self::URL_SP_BASE . '/eidlogin?tx_eidlogin_saml%5Baction%5D=acsPost&tx_eidlogin_saml%5Bcontroller%5D=Saml';
     const URL_SP_META = self::URL_SP_BASE . '/eidlogin?tx_eidlogin_saml%5Baction%5D=meta&tx_eidlogin_saml%5Bcontroller%5D=Saml';
     const URL_SKID_META = 'https://service.skidentity.de/fs/saml/metadata';
@@ -28,6 +28,9 @@ class Acceptance extends \Codeception\Module
     const CONFIG_TYPE_CONFIGURED = '_configured';
     const CONFIG_TYPE_ACTIVATED = '_activated';
 
+    /**
+     * Fetch the Skidentity Metadata
+     */
     public function fetchSkidMetaData()
     {
         $metadata = [];
@@ -48,6 +51,7 @@ class Acceptance extends \Codeception\Module
 
     /**
      * Set a LocalConfiguration of a specific type for the tested TYPO3 instance.
+     *
      * Valid types are:
      * - Acceptance::CONFIC_TYPE_BLANK
      * - Acceptance::CONFIC_TYPE_CONFIGURED
@@ -55,7 +59,7 @@ class Acceptance extends \Codeception\Module
      *
      * @param Actor $I The actor to use
      * @param string $configType The type of confg to set
-     * @throws \Exception $e If an invalid type is given
+     * @throws \Exception $e If an invalid configType is given
      */
     public static function setConfiguration(Actor $I, string $configType)
     {
@@ -65,8 +69,8 @@ class Acceptance extends \Codeception\Module
         ) {
             throw new \Exception('invalid config type given');
         }
-        $I->runShellCommand('docker cp ./Tests/_data/LocalConfiguration.php' . $configType . ' `docker ps -f "name=^p396_typo3$" -q`:/var/www/html/typo3conf/LocalConfiguration.php');
-        $I->runShellCommand('docker exec -it -u root `docker ps -f "name=^p396_typo3$" -q` chown www-data:www-data /var/www/html/typo3conf/LocalConfiguration.php');
+        $I->runShellCommand('docker cp ./Tests/_data/LocalConfiguration.php' . $configType . ' `docker ps -f "name=^p396_typo3-11$" -q`:/var/www/html/typo3conf/LocalConfiguration.php');
+        $I->runShellCommand('docker exec -it -u root `docker ps -f "name=^p396_typo3-11$" -q` chown www-data:www-data /var/www/html/typo3conf/LocalConfiguration.php');
         sleep(3);
     }
 }

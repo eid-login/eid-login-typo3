@@ -10,7 +10,7 @@ modules:
         # db access
         - Db:
             # port etc must match the values used in docker compose file of the projects stack!
-            dsn: 'mysql:host=127.0.0.1;port=3311;dbname=p396typo3db'
+            dsn: 'mysql:host=127.0.0.1;port=3314;dbname=p396typo3db'
             user: 'p396typo3user'
             password: 'p396typo3pass'
             populate: true # load dump before all tests
@@ -18,7 +18,7 @@ modules:
             dump: '_data/clear_eid_from_db.sql'
         # selenium webdriver usage
         - WebDriver:
-            url: https://typo3.p396.de
+            url: https://typo3-11.p396.de
             wait: 5
             pageload_timeout: 5
             debug_log_entries: 200

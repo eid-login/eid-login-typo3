@@ -101,11 +101,13 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function clickButtonInDialog(string $buttonLinkLocator)
     {
+        $context = 'div.t3js-modal-footer.modal-footer';
         $I = $this;
         $I->switchToIFrame();
-        $I->waitForElement('.modal.in');
-        $I->click($buttonLinkLocator, '.modal.in .modal-footer');
-        $I->waitForElementNotVisible('.modal.in');
+        $I->waitForElement($context);
+        $I->wait(0.5);
+        $I->click($buttonLinkLocator, $context);
+        $I->waitForElementNotVisible($context);
         $I->switchToContentFrame();
     }
 

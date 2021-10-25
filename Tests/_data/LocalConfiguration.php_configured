@@ -16,7 +16,7 @@ return [
                 'charset' => 'utf8mb4',
                 'dbname' => 'p396typo3db',
                 'driver' => 'mysqli',
-                'host' => 'p396_typo3_mysql',
+                'host' => 'p396_typo3-11_mysql',
                 'password' => 'p396typo3pass',
                 'port' => 3306,
                 'tableoptions' => [
@@ -102,7 +102,7 @@ PgsyeK+LoQ==
                 'sp_cert_old' => '',
                 'sp_cert_old_enc' => '',
                 'sp_enforce_enc' => false,
-                'sp_entity_id' => 'https://typo3.p396.de',
+                'sp_entity_id' => 'https://typo3-11.p396.de',
                 'sp_key_act' => '-----BEGIN PRIVATE KEY-----
 MIIG/gIBADANBgkqhkiG9w0BAQEFAASCBugwggbkAgEAAoIBgQC0ZVi9euLTqFjh
 8FSoKxNsFB3sQ3hV1mJiHvo7yrt3x/N8Is6NLe6I2MWi5nRS8RBK9w5J37q/M1b1
@@ -233,7 +233,7 @@ IRdtsO3N7H60OX3dDxLGcmZ3NnA=
         ],
     ],
     'MAIL' => [
-        'defaultMailFromAddress' => 'tobias.assmann@ecsec.de',
+        'defaultMailFromAddress' => 'admin@typo3.p396.de',
         'transport' => 'sendmail',
         'transport_sendmail_command' => '/usr/sbin/sendmail -t -i',
         'transport_smtp_encrypt' => '',

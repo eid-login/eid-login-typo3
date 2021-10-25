@@ -59,10 +59,5 @@ class BackendManualCertificateCest
         // check for eID-Login button presence
         $I->amOnPage('/');
         $I->seeElement('#eidlogin-login-logo');
-
-        /*
-    cy.logout();
-    cy.get('.eidlogin-login-button').should('be.visible')
-    */
     }
 }
