@@ -276,8 +276,6 @@ class SettingsService implements LoggerAwareInterface
         if ($activated=='') {
             $activated = false;
         }
-        error_log('foo');
-        error_log(print_r($activated, true));
         $currentExtConfig = $this->config->get('eidlogin');
         $currentExtConfig[$siteRootPageId]['activated'] = !$activated;
         if (Typo3VersionUtil::isVersion10()) {
