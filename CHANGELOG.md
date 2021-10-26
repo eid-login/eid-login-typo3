@@ -9,6 +9,7 @@
 ## 1.2.0 2021-10-26
 ### Added
 - Add support for TYPO3 11.5
+- Add .gitattributes file
 ### Fixed
 - TYPO3 11 Login Cookie Setting fixed
 ### Changed

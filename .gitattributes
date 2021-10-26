@@ -1,0 +1,10 @@
+# ignore for 'git archive' command, used by composer to create download archives
+/.editorconfig	export-ignore
+/.env.dist	export-ignore
+/.gitignore	export-ignore
+/.php_cs.php	export-ignore
+/composer.lock	export-ignore
+/phpstan.neon	export-ignore
+/Tests		export-ignore
+# let git use it's php diff capabilities
+*.php diff=php
