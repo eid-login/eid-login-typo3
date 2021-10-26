@@ -1,4 +1,6 @@
 <?php
+# This template file gets copied into a container
+# after being parsed and value replaced by sed in \Helper\Acceptance->setConfiguration($configType)
 return [
     'BE' => [
         'debug' => false,
@@ -16,7 +18,7 @@ return [
                 'charset' => 'utf8mb4',
                 'dbname' => 'p396typo3db',
                 'driver' => 'mysqli',
-                'host' => 'p396_typo3-11_mysql',
+                'host' => '%DB_HOST%',
                 'password' => 'p396typo3pass',
                 'port' => 3306,
                 'tableoptions' => [

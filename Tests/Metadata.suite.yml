@@ -9,4 +9,4 @@ modules:
         - Asserts
         # for doing http requests
         - PhpBrowser:
-            url: https://typo3-11.p396.de
+            url: %BASE_URL%

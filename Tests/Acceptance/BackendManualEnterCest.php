@@ -34,7 +34,7 @@ class BackendManualEnterCest
         $I->seeAlerts(AcceptanceTester::ALERT_TYPE_DANGER, 4);
         $I->closeAlerts(AcceptanceTester::ALERT_TYPE_DANGER);
         // filling sp_entity_id correctly
-        $I->fillField('#eidlogin-settings-form-manual-sp_entity_id', Acceptance::URL_SP_BASE);
+        $I->fillField('#eidlogin-settings-form-manual-sp_entity_id', Acceptance::getBaseUrl());
         $I->click('#eidlogin-settings-button-manual-save');
         $I->clickButtonInDialog('Save and delete eID connections');
         $I->seeAlerts(AcceptanceTester::ALERT_TYPE_DANGER, 3);

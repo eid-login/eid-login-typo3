@@ -6,11 +6,13 @@
 ### Fixed
 ### Security
 
-## 1.2.0 2021-10-25
+## 1.2.0 2021-10-26
 ### Added
 - Add support for TYPO3 11.5
 ### Fixed
 - TYPO3 11 Login Cookie Setting fixed
+### Changed
+- Enable automated tests for multiple TYPO3 Versions
 ## 1.1.0 2021-10-04
 ### Added
 - Add support for TYPO3 11

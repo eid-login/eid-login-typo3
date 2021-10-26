@@ -5,3 +5,5 @@ paths:
     support: ./Support
     envs: ./_envs
 actor_suffix: Tester
+params:
+    - .env.typo3-11

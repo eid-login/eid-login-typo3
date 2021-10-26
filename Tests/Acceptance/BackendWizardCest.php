@@ -55,7 +55,7 @@ class BackendWizardCest
         $skidMetadata = $I->fetchSkidMetaData();
         $I->click('#eidlogin-settings-button-next-2');
         $I->seeElement('#eidlogin-settings-wizard-panel-2');
-        $I->seeInField('#eidlogin-settings-form-wizard-sp_entity_id', Acceptance::URL_SP_BASE);
+        $I->seeInField('#eidlogin-settings-form-wizard-sp_entity_id', Acceptance::getBaseUrl());
         $I->dontSeeCheckboxIsChecked('#eidlogin-settings-form-wizard-sp_enforce_enc');
         $I->fillField('#eidlogin-settings-form-wizard-idp_metadata_url', Acceptance::URL_SKID_META);
         $I->click('#eidlogin-settings-button-toggleidp');
@@ -73,9 +73,9 @@ class BackendWizardCest
         $I->click('#eidlogin-settings-button-next-3');
         $I->waitForElementVisible('#eidlogin-settings-wizard-panel-3', 10);
         $I->closeAlerts(AcceptanceTester::ALERT_TYPE_SUCCESS);
-        $I->see(Acceptance::URL_SP_BASE, '#eidlogin-settings-wizard-display-sp_entity_id');
-        $I->see(Acceptance::URL_SP_ACS, '#eidlogin-settings-wizard-display-sp_acs_url');
-        $I->see(Acceptance::URL_SP_META, '#eidlogin-settings-wizard-display-sp_meta_url');
+        $I->see(Acceptance::getBaseUrl(), '#eidlogin-settings-wizard-display-sp_entity_id');
+        $I->see(Acceptance::getAcsUrl(), '#eidlogin-settings-wizard-display-sp_acs_url');
+        $I->see(Acceptance::getMetaUrl(), '#eidlogin-settings-wizard-display-sp_meta_url');
         // test back buttons
         $I->click('#eidlogin-settings-button-back-2');
         $I->waitForElementVisible('#eidlogin-settings-wizard-panel-2', 10);

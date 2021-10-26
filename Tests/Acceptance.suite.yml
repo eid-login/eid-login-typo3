@@ -1,8 +1,12 @@
+# values like %BASE_URL% come from .env file
 actor: AcceptanceTester
 modules:
     enabled:
         # the local module in ./Support/Helper/Acceptance
-        - \Helper\Acceptance
+        - \Helper\Acceptance:
+            db_host: %DB_HOST%
+            base_url: %BASE_URL%
+            docker_name: %DOCKER_NAME%
         # for TYPO3 specifica
         - \TYPO3\TestingFramework\Core\Acceptance\Helper\Login
         # for running shell commands
@@ -10,7 +14,7 @@ modules:
         # db access
         - Db:
             # port etc must match the values used in docker compose file of the projects stack!
-            dsn: 'mysql:host=127.0.0.1;port=3314;dbname=p396typo3db'
+            dsn: 'mysql:host=127.0.0.1;port=%DB_PORT%;dbname=p396typo3db'
             user: 'p396typo3user'
             password: 'p396typo3pass'
             populate: true # load dump before all tests
@@ -18,7 +22,7 @@ modules:
             dump: '_data/clear_eid_from_db.sql'
         # selenium webdriver usage
         - WebDriver:
-            url: https://typo3-11.p396.de
+            url: %BASE_URL%
             wait: 5
             pageload_timeout: 5
             debug_log_entries: 200

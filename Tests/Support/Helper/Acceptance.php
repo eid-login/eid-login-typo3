@@ -10,9 +10,6 @@ use Ecsec\Eidlogin\Dep\OneLogin\Saml2\IdPMetadataParser;
 
 class Acceptance extends \Codeception\Module
 {
-    const URL_SP_BASE = 'https://typo3-11.p396.de';
-    const URL_SP_ACS = self::URL_SP_BASE . '/eidlogin?tx_eidlogin_saml%5Baction%5D=acsPost&tx_eidlogin_saml%5Bcontroller%5D=Saml';
-    const URL_SP_META = self::URL_SP_BASE . '/eidlogin?tx_eidlogin_saml%5Baction%5D=meta&tx_eidlogin_saml%5Bcontroller%5D=Saml';
     const URL_SKID_META = 'https://service.skidentity.de/fs/saml/metadata';
 
     const CERT_INVALID_INSUFFICENT_PUBKEY_LENGTH = 'MIIBKTCB1KADAgECAgRglScoMA0GCSqGSIb3DQEBCwUAMBwxGjAYBgNVBAMMEXRlc3QtY2VydCByc2EgNTEyMB4XDTIxMDUwNzExNDAyNFoXDTIyMDUwNzExNDAyNFowHDEaMBgGA1UEAwwRdGVzdC1jZXJ0IHJzYSA1MTIwXDANBgkqhkiG9w0BAQEFAANLADBIAkEA0LP4k6cbOL1xSs432wj9YB/TB3BkO7j7fxelkqJZNPTtWrMlj1L+3qpPAuGdhXkj689o38Rbk9yOpqq4FlN11QIDAQABMA0GCSqGSIb3DQEBCwUAA0EAo1xf6bJSmcBB9Q2URr7DM22GPeykJGwmAltR3nBeXvauzbS4syF+/cjVzEO+t8wCo+Ws7tfvcLCocUp+cOVZNQ==';
@@ -50,6 +47,30 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Get the current config based base URL
+     */
+    public static function getBaseUrl()
+    {
+        return self::readBaseUrlFromConfig();
+    }
+
+    /**
+     * Get the current config based acs URL
+     */
+    public static function getAcsUrl()
+    {
+        return self::readBaseUrlFromConfig() . '/eidlogin?tx_eidlogin_saml%5Baction%5D=acsPost&tx_eidlogin_saml%5Bcontroller%5D=Saml';
+    }
+
+    /**
+     * Get the current config based meta URL
+     */
+    public static function getMetaUrl()
+    {
+        return self::readBaseUrlFromConfig() . '/eidlogin?tx_eidlogin_saml%5Baction%5D=meta&tx_eidlogin_saml%5Bcontroller%5D=Saml';
+    }
+
+    /**
      * Set a LocalConfiguration of a specific type for the tested TYPO3 instance.
      *
      * Valid types are:
@@ -69,8 +90,28 @@ class Acceptance extends \Codeception\Module
         ) {
             throw new \Exception('invalid config type given');
         }
-        $I->runShellCommand('docker cp ./Tests/_data/LocalConfiguration.php' . $configType . ' `docker ps -f "name=^p396_typo3-11$" -q`:/var/www/html/typo3conf/LocalConfiguration.php');
-        $I->runShellCommand('docker exec -it -u root `docker ps -f "name=^p396_typo3-11$" -q` chown www-data:www-data /var/www/html/typo3conf/LocalConfiguration.php');
+        // read values from config which differ for each TYPO3 version
+        $config = \Codeception\Configuration::config();
+        $settings = \Codeception\Configuration::suiteSettings('Acceptance', $config);
+        $dbHost = $settings['modules']['enabled'][0]['\Helper\Acceptance']['db_host'];
+        $baseUrl = $settings['modules']['enabled'][0]['\Helper\Acceptance']['base_url'];
+        $dockerName = $settings['modules']['enabled'][0]['\Helper\Acceptance']['docker_name'];
+        // replace values in the configuration template and write it into the container
+        // sed uses spaces as delimiters
+        $I->runShellCommand('sed "s %DB_HOST% ' . $dbHost . ' g; s %BASE_URL% ' . $baseUrl . ' g" ./Tests/_data/LocalConfiguration.php' . $configType . ' | docker exec -i -u root `docker ps -f "name=^' . $dockerName . '$" -q` tee /var/www/html/typo3conf/LocalConfiguration.php');
+        $I->runShellCommand('docker exec -it -u root `docker ps -f "name=^' . $dockerName . '$" -q` chown www-data:www-data /var/www/html/typo3conf/LocalConfiguration.php');
         sleep(3);
+    }
+
+    /**
+     * Read the base url to use from the currenct config
+     */
+    private static function readBaseUrlFromConfig()
+    {
+        $config = \Codeception\Configuration::config();
+        $settings = \Codeception\Configuration::suiteSettings('Acceptance', $config);
+        $baseUrl = $settings['modules']['enabled'][0]['\Helper\Acceptance']['base_url'];
+
+        return $baseUrl;
     }
 }

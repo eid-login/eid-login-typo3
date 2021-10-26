@@ -59,7 +59,7 @@ class MetadataCest
         $acs = $ssoDesc->children($ns['md'])[2];
         $I->assertEquals('AssertionConsumerService', $acs->getName());
         $attr = $acs->attributes();
-        $I->assertEquals(Acceptance::URL_SP_ACS, $attr['Location']);
+        $I->assertEquals(Acceptance::getAcsUrl(), $attr['Location']);
         $I->assertEquals('urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST', $attr['Binding']);
     }
 }

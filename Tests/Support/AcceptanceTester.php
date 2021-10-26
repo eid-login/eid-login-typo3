@@ -64,7 +64,7 @@ class AcceptanceTester extends \Codeception\Actor
         $I->fillField('p_field', 'adminP396');
         $I->click('#t3-login-submit');
         // are we logged in?
-        $I->seeElement(['class' => 'topbar']);
+        $I->waitForElement(['class' => 'topbar']);
         // are we in english language?
         $I->see('Page');
         // maybe we need to cancel notification modal
