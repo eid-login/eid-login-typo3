@@ -6,6 +6,10 @@
 ### Fixed
 ### Security
 
+## 1.2.1 2021-10-26
+### Fixed
+- fix composer deps
+
 ## 1.2.0 2021-10-26
 ### Added
 - Add support for TYPO3 11.5
