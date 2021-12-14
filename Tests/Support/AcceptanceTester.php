@@ -66,7 +66,7 @@ class AcceptanceTester extends \Codeception\Actor
         // are we logged in?
         $I->waitForElement(['class' => 'topbar']);
         // are we in english language?
-        $I->see('Page');
+        $I->see('Site Management');
         // maybe we need to cancel notification modal
         $I->tryToClick('button[name=cancel]');
     }

@@ -18,43 +18,43 @@ class BackendWizardCest
         $I->loginBe();
         $I->openEidLoginBeModule();
         // check for matrix with site p396 present without being setup already
-        $I->seeElement('#eidlogin-settings-matrix');
+        $I->waitForElement('#eidlogin-settings-matrix');
         $I->see('p396', '//*[@id="eidlogin-settings-matrix"]/tbody/tr[last()]/td[1]');
         $I->see('No', '//*[@id="eidlogin-settings-matrix"]/tbody/tr[last()]/td[7]/span');
         // check action menu
         $I->selectOption('EidLoginSiteSelector', 'p396');
-        $I->seeElement('#eidlogin-settings-wizard-panel-1');
+        $I->waitForElement('#eidlogin-settings-wizard-panel-1');
         $I->see('eID-Login - p396', 'h1');
         $I->selectOption('EidLoginSiteSelector', 'Select Site ...');
-        $I->seeElement('#eidlogin-settings-matrix');
+        $I->waitForElement('#eidlogin-settings-matrix');
         // check info panel
         $I->click('#eidlogin-settings-button-help');
-        $I->seeElement('#eidlogin-settings-wizard-panel-help');
+        $I->waitForElement('#eidlogin-settings-wizard-panel-help');
         $I->click('#eidlogin-settings-button-close-help');
         $I->dontSeeElement('#eidlogin-settings-wizard-panel-help');
         $I->click('#eidlogin-settings-button-help');
-        $I->seeElement('#eidlogin-settings-wizard-panel-help');
+        $I->waitForElement('#eidlogin-settings-wizard-panel-help');
         $I->click('#eidlogin-settings-button-help');
         $I->dontSeeElement('#eidlogin-settings-wizard-panel-help');
         // open wizard for site p396
         // $I->click('Open Settings');
         $I->click('#eidlogin-opensettings_p396');
-        $I->seeElement('#eidlogin-settings-wizard-panel-1');
+        $I->waitForElement('#eidlogin-settings-wizard-panel-1');
         // check wizard navigation steps
-        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
-        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
+        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         $I->click('#eidlogin-settings-wizard-step-2');
-        $I->seeElement('#eidlogin-settings-wizard-panel-2');
-        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step']);
-        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->waitForElement('#eidlogin-settings-wizard-panel-2');
+        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step']);
+        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         $I->click('#eidlogin-settings-wizard-step-1');
-        $I->seeElement('#eidlogin-settings-wizard-panel-1');
-        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
-        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->waitForElement('#eidlogin-settings-wizard-panel-1');
+        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
+        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         // configure IDP with skid metadataurl and check fetched values
         $skidMetadata = $I->fetchSkidMetaData();
         $I->click('#eidlogin-settings-button-next-2');
-        $I->seeElement('#eidlogin-settings-wizard-panel-2');
+        $I->waitForElement('#eidlogin-settings-wizard-panel-2');
         $I->seeInField('#eidlogin-settings-form-wizard-sp_entity_id', Acceptance::getBaseUrl());
         $I->dontSeeCheckboxIsChecked('#eidlogin-settings-form-wizard-sp_enforce_enc');
         $I->fillField('#eidlogin-settings-form-wizard-idp_metadata_url', Acceptance::URL_SKID_META);
