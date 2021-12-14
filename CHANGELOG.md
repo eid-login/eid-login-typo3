@@ -1,9 +1,14 @@
 ## [Unreleased]
 ### Added
+- Usage of function GeneralUtility::_POST and GeneralUtility::_GET (thanks to ayacoo)
 ### Changed
+- Now using a resume step when returning from IdP for non TR-03130 flows for better cookie handling
+- Better BE login check in tests
+- Make BE tests more patient
 ### Deprecated
 ### Removed
 ### Fixed
+- Version Check for TYPO3 11 now matches 11.0.0 also
 ### Security
 
 ## 1.2.1 2021-10-26
