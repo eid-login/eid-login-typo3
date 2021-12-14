@@ -42,7 +42,7 @@ class Typo3VersionUtil
     public static function isVersion11(): bool
     {
         $typo3versionAsInt = VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version());
-        if ($typo3versionAsInt > 11000000 && $typo3versionAsInt < 12000000) {
+        if ($typo3versionAsInt >= 11000000 && $typo3versionAsInt < 12000000) {
             return true;
         }
         return false;
