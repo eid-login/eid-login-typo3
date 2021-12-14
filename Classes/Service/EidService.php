@@ -227,7 +227,13 @@ class EidService implements LoggerAwareInterface
         $reqId = 'eidlogin_' . bin2hex(random_bytes(12));
         // the cookieId
         $cookieId = 'eidlogin_' . bin2hex(random_bytes(12));
-        setcookie(self::COOKIE_SAML, $cookieId, time()+60*5, '/', '', true, true);
+        setcookie(self::COOKIE_SAML, $cookieId, [
+            'expires' => time()+60*5,
+            'path' => '/',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
         // data we need for continue when returning
         $continue = [
             self::KEY_TYPE => $type,
@@ -420,7 +426,7 @@ class EidService implements LoggerAwareInterface
         $rspId = bin2hex(random_bytes(12));
         $responseDataVal = [
             'isAuthenticated' => $auth->isAuthenticated(),
-            'lastErrorException' => $auth->getLastErrorException(),
+            'lastErrorException' => is_null($auth->getLastErrorException()) ? '': substr($auth->getLastErrorException()->__toString(), 0, 2048),
             'errors' => $errors,
             'status' => Utils::getStatus($responseAsXML),
             'eid' => $eid,
@@ -428,26 +434,22 @@ class EidService implements LoggerAwareInterface
         ];
         $continueDataVal = get_object_vars(json_decode($continueData->getValue()));
         $responseDataVal = array_merge($responseDataVal, $continueDataVal);
-        // if we have an TR-03130 flow we need another redirect step,
+        // we need another redirect step, to fetch the cookie (would not be sent with a cross-site post request with samesite=Lax)
+        // or to return to the browser in a TR-03130 flow
         // for this we save the response data to the db
-        if ($this->samlService->checkForTr03130($siteInfo->getSite()->getRootPageId())) {
-            $responseDataJson = json_encode($responseDataVal);
-            $responseData = new ResponseData();
-            $responseData->setRspid($rspId);
-            $responseData->setValue($responseDataJson);
-            $responseData->setTime(time());
-            $this->persistenceManager->add($responseData);
-            $this->persistenceManager->persistAll();
-            $this->uriBuilder->reset();
-            $this->uriBuilder->setTargetPageUid($siteInfo->getSamlPageId());
-            $this->uriBuilder->setArguments(['tx_eidlogin_saml'=>['rspid'=>$rspId]]);
-            $this->uriBuilder->setCreateAbsoluteUri(true);
-            $redirectUrl = $this->uriBuilder->uriFor('resume', [], 'Saml', 'eidlogin', 'Saml');
-            $redirectUrl = preg_replace('/&cHash=.*$/', '', $redirectUrl);
-        // otherwise process data now
-        } else {
-            $redirectUrl = $this->processSamlResponseData($rspId, $responseDataVal, $locale);
-        }
+        $responseDataJson = json_encode($responseDataVal);
+        $responseData = new ResponseData();
+        $responseData->setRspid($rspId);
+        $responseData->setValue($responseDataJson);
+        $responseData->setTime(time());
+        $this->persistenceManager->add($responseData);
+        $this->persistenceManager->persistAll();
+        $this->uriBuilder->reset();
+        $this->uriBuilder->setTargetPageUid($siteInfo->getSamlPageId());
+        $this->uriBuilder->setArguments(['tx_eidlogin_saml'=>['rspid'=>$rspId]]);
+        $this->uriBuilder->setCreateAbsoluteUri(true);
+        $redirectUrl = $this->uriBuilder->uriFor('resume', [], 'Saml', 'eidlogin', 'Saml');
+        $redirectUrl = preg_replace('/&cHash=.*$/', '', $redirectUrl);
 
         return $redirectUrl;
     }
@@ -510,7 +512,13 @@ class EidService implements LoggerAwareInterface
             return $redirectUrl . '?' . MessageService::PARAM_MSGID . '=' . $msgId;
         }
         $cookieIdFromCookie = filter_var($_COOKIE[self::COOKIE_SAML], FILTER_SANITIZE_STRING);
-        setcookie(self::COOKIE_SAML, '', time()-1, '/', '', true, true);
+        setcookie(self::COOKIE_SAML, '', [
+            'expires' => time()+60*5,
+            'path' => '/',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
         if ($cookieIdFromCookie != $cookieIdFromResponseData) {
             $this->logger->error('processResponseData could not find correct cookieId in cookie');
             $msgId = $this->setErrorMsg($flow, $errMsgLogin, $errMsgCreate);
@@ -523,6 +531,8 @@ class EidService implements LoggerAwareInterface
             $msg = '';
             if (is_array($responseDataVal['status'])) {
                 $msg = $responseDataVal['status']['msg'];
+            } elseif (is_object($responseDataVal['status'])) {
+                $msg = $responseDataVal['status']->msg;
             }
             preg_match('/.*cancel.*/', $msg, $res);
             if (count($res)>0) {
@@ -530,6 +540,7 @@ class EidService implements LoggerAwareInterface
                 $errMsgLogin = $this->l10nUtil->translate('co_msg_err_eid_login_abort', 'eidlogin', [], $locale);
             }
             $this->logger->info('processResponseData found errors or user not authenticated - errors:' . print_r($responseDataVal['errors'], true) . ', saml status msg: ' . $msg);
+            $this->logger->info('processResponseData - lastErrorException:' . $responseDataVal['lastErrorException']);
             $msgId = $this->setErrorMsg($flow, $errMsgLogin, $errMsgCreate);
 
             return $redirectUrl . '?' . MessageService::PARAM_MSGID . '=' . $msgId;
