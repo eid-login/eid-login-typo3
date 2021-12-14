@@ -29,6 +29,7 @@ use Ecsec\Eidlogin\Util\Typo3VersionUtil;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -404,7 +405,7 @@ class EidService implements LoggerAwareInterface
                     if (!array_key_exists('SigAlg', $_GET)) {
                         throw new \Exception('Missing SigAlg param');
                     }
-                    if (!in_array($_GET['SigAlg'], $samlSettings['alg']['signing'])) {
+                    if (!in_array(GeneralUtility::_GET('SigAlg'), $samlSettings['alg']['signing'])) {
                         throw new \Exception('Invalid SigAlg param ' . filter_var($_REQUEST['SigAlg'], FILTER_SANITIZE_SPECIAL_CHARS));
                     }
                     Utils::validateBinarySign('SAMLResponse', $_GET, $samlSettings['idp']);

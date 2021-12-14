@@ -328,19 +328,19 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
     public function saveSettingsAction()
     {
         $this->logger->debug('eidlogin - BackendController - saveSettingsAction; enter');
-        $siteRootPageId = $_POST['site_root_page_id'];
+        $siteRootPageId = GeneralUtility::_POST('site_root_page_id');
         if (is_null($siteRootPageId)) {
             throw new \Exception('misssing parameter site_root_page_id');
         }
         $errors = $this->settingsService->saveSettings(
             (int)$siteRootPageId,
-            $_POST['idp_cert_enc'],
-            $_POST['idp_cert_sign'],
-            $_POST['idp_entity_id'],
-            $_POST['idp_ext_tr03130'],
-            $_POST['idp_sso_url'],
-            $_POST['sp_enforce_enc'],
-            $_POST['sp_entity_id']
+            GeneralUtility::_POST('idp_cert_enc'),
+            GeneralUtility::_POST('idp_cert_sign'),
+            GeneralUtility::_POST('idp_entity_id'),
+            GeneralUtility::_POST('idp_ext_tr03130'),
+            GeneralUtility::_POST('idp_sso_url'),
+            GeneralUtility::_POST('sp_enforce_enc'),
+            GeneralUtility::_POST('sp_entity_id')
         );
         if (count($errors)>0) {
             $data = [
@@ -376,10 +376,10 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
     public function toggleActivatedAction()
     {
         $this->logger->debug('eidlogin - BackendController - toggleActivatedAction; enter');
-        if (is_null($_GET['site_root_page_id'])) {
+        if (is_null(GeneralUtility::_GET('site_root_page_id'))) {
             throw new \Exception('misssing parameter site_root_page_id');
         }
-        $siteRootPageId = $_GET['site_root_page_id'];
+        $siteRootPageId = GeneralUtility::_GET('site_root_page_id');
         $this->settingsService->toggleActivated($siteRootPageId);
         $msg = $this->l10nUtil->translate('be_msg_scs_deactivated', 'eidlogin');
         if ($this->settingsService->getActivated($siteRootPageId)=='1') {
@@ -399,10 +399,10 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
     public function resetSettingsAction()
     {
         $this->logger->debug('eidlogin - BackendController - resetSettingsAction; enter');
-        if (is_null($_GET['site_root_page_id'])) {
+        if (is_null(GeneralUtility::_GET('site_root_page_id'))) {
             throw new \Exception('misssing parameter site_root_page_id');
         }
-        $siteRootPageId = $_GET['site_root_page_id'];
+        $siteRootPageId = GeneralUtility::_GET('site_root_page_id');
         $this->settingsService->deleteSettings($siteRootPageId);
         $siteInfo = $this->siteInfoService->getSiteInfoByPageId($siteRootPageId);
         $this->eidService->deleteEids($siteInfo);
@@ -420,10 +420,10 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
     */
     public function prepareRolloverAction()
     {
-        if (is_null($_GET['site_root_page_id'])) {
+        if (is_null(GeneralUtility::_GET('site_root_page_id'))) {
             throw new \Exception('misssing parameter site_root_page_id');
         }
-        $siteRootPageId = $_GET['site_root_page_id'];
+        $siteRootPageId = GeneralUtility::_GET('site_root_page_id');
         $data = [];
         try {
             $this->sslService->createNewCert($siteRootPageId);
@@ -452,10 +452,10 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
      */
     public function executeRolloverAction()
     {
-        if (is_null($_GET['site_root_page_id'])) {
+        if (is_null(GeneralUtility::_GET('site_root_page_id'))) {
             throw new \Exception('misssing parameter site_root_page_id');
         }
-        $siteRootPageId = $_GET['site_root_page_id'];
+        $siteRootPageId = GeneralUtility::_GET('site_root_page_id');
         $data = [];
         try {
             $this->sslService->rollover($siteRootPageId);

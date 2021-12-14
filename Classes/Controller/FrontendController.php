@@ -25,6 +25,7 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\FormProtection\AbstractFormProtection;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -253,9 +254,9 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
         $this->uriBuilder->setTargetPageUid($GLOBALS['TSFE']->id);
         $this->uriBuilder->setCreateAbsoluteUri(true);
         $redirectUrl = $this->uriBuilder->buildFrontendUri();
-        if ($_GET[MessageService::PARAM_MSGID]!='') {
+        if (GeneralUtility::_GET(MessageService::PARAM_MSGID)!='') {
             $redirectUrl = preg_replace('/&cHash=.*$/', '', $redirectUrl);
-            $redirectUrl .= '?' . MessageService::PARAM_MSGID . '=' . $_GET[MessageService::PARAM_MSGID];
+            $redirectUrl .= '?' . MessageService::PARAM_MSGID . '=' . GeneralUtility::_GET(MessageService::PARAM_MSGID);
         }
         $this->logger->debug('eidlogin - FrontendController - logoutAction; redirect to ' . $redirectUrl);
         $this->redirectToURI($redirectUrl, $delay = 0, $statusCode = 307);
