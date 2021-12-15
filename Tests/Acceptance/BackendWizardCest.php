@@ -41,16 +41,16 @@ class BackendWizardCest
         $I->click('#eidlogin-opensettings_p396');
         $I->waitForElement('#eidlogin-settings-wizard-panel-1');
         // check wizard navigation steps
-        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
-        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
+        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         $I->click('#eidlogin-settings-wizard-step-2');
         $I->waitForElement('#eidlogin-settings-wizard-panel-2');
-        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step']);
-        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step']);
+        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         $I->click('#eidlogin-settings-wizard-step-1');
         $I->waitForElement('#eidlogin-settings-wizard-panel-1');
-        $I->waitForElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
-        $I->waitForElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
+        $I->seeElement('#eidlogin-settings-wizard-step-3', ['class'=>'step disabled']);
+        $I->seeElement('#eidlogin-settings-wizard-step-4', ['class'=>'step disabled']);
         // configure IDP with skid metadataurl and check fetched values
         $skidMetadata = $I->fetchSkidMetaData();
         $I->click('#eidlogin-settings-button-next-2');
