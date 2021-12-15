@@ -5,6 +5,7 @@
 - Now using a resume step when returning from IdP for non TR-03130 flows for better cookie handling
 - Better BE login check in tests
 - Make BE tests more patient
+- Fix language handling in BE for en language
 ### Deprecated
 ### Removed
 ### Fixed

@@ -273,21 +273,20 @@ class BackendController extends ActionController implements \Psr\Log\LoggerAware
         $baseUrl = rtrim($baseUrl, '/');
         $this->view->assign('base_url', $baseUrl);
         // get language
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $lang = $GLOBALS['BE_USER']->uc['lang'];
+        $langStr = $lang;
         // skid url
         if ($lang === 'de') {
             $this->view->assign('skid_url', 'https://skidentity.de');
+            $langStr .= '.';
         } else {
             $this->view->assign('skid_url', 'https://skidentity.com');
-        }
-        // language must be set after everything else
-        $langStr = $lang;
-        if (strlen($lang)!=0) {
-            $langStr .= '.';
+            $langStr = '';
         }
         $inlineLanguageLabelFile = 'EXT:eidlogin/Resources/Private/Language/' . $langStr . 'locallang.xlf';
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->addInlineLanguageLabelFile($inlineLanguageLabelFile, 'be_js_');
+        // language must be set after everything else
         $pageRenderer->setLanguage($lang);
     }
 
