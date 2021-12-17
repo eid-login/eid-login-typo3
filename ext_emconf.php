@@ -10,12 +10,12 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'eID-Login@ecsec.de',
     'state' => 'stable',
     'clearCacheOnLoad' => true,
-    'version' => '1.2.1',
+    'version' => '1.2.2',
     'constraints' => [
         'depends' => [
-            'scheduler' => '10.4.21-11.5.99',
-            'typo3' => '10.4.21-11.5.99',
-            'php' => '7.4.8-7.4.99',
+            'scheduler' => '10.4.0-11.5.99',
+            'typo3' => '10.4.0-11.5.99',
+            'php' => '7.4.0-8.0.99',
         ]
     ],
     'autoload' => [

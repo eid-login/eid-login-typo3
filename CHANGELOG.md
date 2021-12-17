@@ -1,5 +1,13 @@
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## 1.2.2 2021-12-17
+### Added
 - Usage of function GeneralUtility::_POST and GeneralUtility::_GET (thanks to ayacoo)
 ### Changed
 - Now using a resume step when returning from IdP for non TR-03130 flows for better cookie handling
@@ -10,7 +18,6 @@
 ### Removed
 ### Fixed
 - Version Check for TYPO3 11 now matches 11.0.0 also
-### Security
 
 ## 1.2.1 2021-10-26
 ### Fixed
