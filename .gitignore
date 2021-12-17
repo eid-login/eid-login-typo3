@@ -1,7 +1,8 @@
 !.gitkeep
 .env
 .php_cs.cache
+Tests/_output/
+dep/
 eidlogin*.zip
 public
-Tests/_output/
 vendor
