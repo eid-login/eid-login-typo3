@@ -193,8 +193,8 @@ class EidService implements LoggerAwareInterface
      *
      * @param string $type the desired type of action, fe or be
      * @param string $flow the flow we are starting
-     * @param ?SiteInfo $siteInfo The siteInfo of the current site, only needed for TYPE_FE
      * @param string $redirectUrl the url to redirect to after the flow
+     * @param SiteInfo $siteInfo The siteInfo of the current site, only needed for TYPE_FE (optional)
      *
      * @return string $url The url to go next
      *
@@ -203,8 +203,8 @@ class EidService implements LoggerAwareInterface
     public function startEidFlow(
         string $type='',
         string $flow='',
-        SiteInfo $siteInfo,
-        string $redirectUrl='/'
+        string $redirectUrl='/',
+        SiteInfo $siteInfo
     ) {
         if (!$this->settingsService->getActivated($siteInfo->getSite()->getRootPageId())) {
             throw new \Exception('eID-Login not active');
@@ -727,11 +727,11 @@ class EidService implements LoggerAwareInterface
      * Delete the eid connections and attributes of all users belonging to given site
      * NOT YET DONE FOR TYPE_BE
      *
-     * @param SiteInfo The siteInfo to delete for
+     * @param SiteInfo $siteInfo The siteInfo to delete for
      *
      * @return bool True on success, false in case of error
      */
-    public function deleteEids($siteInfo): bool
+    public function deleteEids(SiteInfo $siteInfo): bool
     {
         try {
             $userPids = $siteInfo->getUserPageIds();

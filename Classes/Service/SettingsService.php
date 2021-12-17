@@ -363,12 +363,12 @@ class SettingsService implements LoggerAwareInterface
     /**
      * Get the value of the tx_eidlogin_disablepwlogin setting for the given uid.
      *
-     * @param string $type The type of the uid given
      * @param int $uid The uid to fetch the value for
+     * @param string $type The type of the uid given
      *
      * @return int The value of the setting, null if none has been found
      */
-    public function getDisablePwLogin(string $type=EidService::TYPE_FE, int $uid): ?int
+    public function getDisablePwLogin(int $uid, string $type=EidService::TYPE_FE): ?int
     {
         // check type
         if ($type !== EidService::TYPE_FE && $type !== EidService::TYPE_BE) {
@@ -385,13 +385,13 @@ class SettingsService implements LoggerAwareInterface
      * Set the value of the tx_eidlogin_disablepwlogin setting for the given uid.
      * This may fail if the fe_user with the given uid has no email set and the value to set is 1
      *
-     * @param string $type The type of the uid given
      * @param int $uid The uid to set the value for
      * @param int $value The value to set
+     * @param string $type The type of the uid given
      *
      * @return bool True if the value has been set
      */
-    public function setDisablePwLogin(string $type=EidService::TYPE_FE, int $uid, $value): bool
+    public function setDisablePwLogin(int $uid, $value, string $type=EidService::TYPE_FE): bool
     {
         // check type
         if ($type !== EidService::TYPE_FE && $type !== EidService::TYPE_BE) {

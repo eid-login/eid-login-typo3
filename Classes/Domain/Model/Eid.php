@@ -57,8 +57,8 @@ class Eid extends AbstractEntity
      *
      * @param string $eidvalue
      * @param ObjectStorage<Attribute> $attributes
-     * @param ?int $feuid
-     * @param ?int $beuid
+     * @param int $feuid (optional)
+     * @param int $beuid (optional)
      */
     /*
     public function __construct($eidvalue = null, $attributes = null, $feuid = null, $beuid = null)

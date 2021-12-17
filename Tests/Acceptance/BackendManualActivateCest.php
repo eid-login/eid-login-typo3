@@ -23,7 +23,7 @@ class BackendManualActivateCest
         $I->loginBe();
         $I->openEidLoginBeModule();
         $I->selectOption('EidLoginSiteSelector', 'p396');
-        $I->seeElement('#eidlogin-settings-manual');
+        $I->waitForElement('#eidlogin-settings-manual');
         $I->see('eID-Login - p396', 'h1');
         // activate
         $I->click('#eidlogin-settings-label-activated');

@@ -23,10 +23,10 @@ class AttributeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Find the attributes of an eid
      *
-     * @param string $eidUid
+     * @param int $eidUid
      * @return Attribute[] $attributes The attributes of an eid
      */
-    public function findByEidUid(string $eidUid)
+    public function findByEidUid(int $eidUid)
     {
         $query = $this->createQuery();
         return $query

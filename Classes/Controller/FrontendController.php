@@ -110,7 +110,7 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
         $uid = $GLOBALS['TSFE']->fe_user->user['uid'];
         $this->view->assign('activated', $this->settingsService->getActivated($this->siteInfo->getSite()->getRootPageId()));
         $this->view->assign('eid_present', $this->eidService->checkEid(EidService::TYPE_FE, (int)$uid));
-        $this->view->assign('disable_pw_login', $this->settingsService->getDisablePwLogin(EidService::TYPE_FE, $uid));
+        $this->view->assign('disable_pw_login', $this->settingsService->getDisablePwLogin($uid, EidService::TYPE_FE));
         $this->view->assign('create_token', $this->formProtection->generateToken('FE_settings', 'createEid'));
         $this->view->assign('delete_token', $this->formProtection->generateToken('FE_settings', 'deleteEid'));
         $langId = $this->context->getAspect('language')->getId();
@@ -156,8 +156,8 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
         $redirectUrl = $this->eidService->startEidFlow(
             EidService::TYPE_FE,
             EidService::FLOW_CREATE,
-            $this->siteInfo,
-            $redirectUrl
+            $redirectUrl,
+            $this->siteInfo
         );
         $this->logger->debug('eidlogin - FrontendController - createEidAction; redirect to ' . $redirectUrl);
         $this->redirectToURI($redirectUrl, $delay = 0, $statusCode = 307);
@@ -232,8 +232,8 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
             $redirectUrl = $this->eidService->startEidFlow(
                 EidService::TYPE_FE,
                 EidService::FLOW_LOGIN,
-                $this->siteInfo,
-                $redirectUrl
+                $redirectUrl,
+                $this->siteInfo
             );
         }
         $this->logger->debug('eidlogin - FrontendController - startLoginAction; redirect to ' . $redirectUrl);
@@ -272,7 +272,7 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
         if (is_null($GLOBALS['TSFE']->fe_user->user['uid'])) {
             throw new \Exception('no fe_user logged in');
         }
-        $set = $this->settingsService->setDisablePwLogin(EidService::TYPE_FE, $GLOBALS['TSFE']->fe_user->user['uid'], 1);
+        $set = $this->settingsService->setDisablePwLogin($GLOBALS['TSFE']->fe_user->user['uid'], 1, EidService::TYPE_FE);
         if ($set) {
             $msg = $this->l10nUtil->translate('fe_msg_scs_setting_saved', 'eidlogin');
             $this->addFlashMessage($msg, 'eID-Login', AbstractMessage::OK, true);
@@ -298,7 +298,7 @@ class FrontendController extends ActionController implements LoggerAwareInterfac
         if (is_null($GLOBALS['TSFE']->fe_user->user['uid'])) {
             throw new \Exception('no fe_user logged in');
         }
-        $this->settingsService->setDisablePwLogin(EidService::TYPE_FE, $GLOBALS['TSFE']->fe_user->user['uid'], 0);
+        $this->settingsService->setDisablePwLogin($GLOBALS['TSFE']->fe_user->user['uid'], 0, EidService::TYPE_FE);
         $msg = $this->l10nUtil->translate('fe_msg_scs_setting_saved', 'eidlogin');
         $this->addFlashMessage($msg, 'eID-Login', AbstractMessage::OK, true);
         $this->uriBuilder->reset();

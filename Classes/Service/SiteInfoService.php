@@ -269,7 +269,7 @@ class SiteInfoService implements LoggerAwareInterface
      * Get the ID of user page bound to the frontend plugin in the given site.
      *
      * @param int $pageId The page id the frontend plugin is part of
-     * @param $fePluginType The type of frontend plugin to look for, must be self::FE_PLUGIN_LOGIN or self::FE_PLUGIN_SETTINGS
+     * @param string $fePluginType The type of frontend plugin to look for, must be self::FE_PLUGIN_LOGIN or self::FE_PLUGIN_SETTINGS
      *
      * @return string The user page ids If the value could not be specified (none or many)
      * @throws \Exception If invalid type of frontend plugin is given
