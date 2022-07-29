@@ -201,9 +201,9 @@ class EidService implements LoggerAwareInterface
      * @throws \Exception If invalid params are given
      */
     public function startEidFlow(
-        string $type='',
-        string $flow='',
-        string $redirectUrl='/',
+        string $type,
+        string $flow,
+        string $redirectUrl,
         SiteInfo $siteInfo
     ) {
         if (!$this->settingsService->getActivated($siteInfo->getSite()->getRootPageId())) {
