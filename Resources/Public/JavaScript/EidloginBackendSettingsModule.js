@@ -71,7 +71,7 @@ define([
         mod.dom.buttonWizardFinish.addEventListener('click', (e)=>{
             e.preventDefault();
             window.scrollTo(0,0);
-            window.location.reload(); 
+            window.location.reload();
         });
         document.getElementById('eidlogin-settings-input-activated').addEventListener('click', mod.toggleActivated);
         document.getElementById('eidlogin-settings-button-manual-save').addEventListener('click', mod.confirmSave);
@@ -121,8 +121,8 @@ define([
 
     // switch to a wizard panel
     mod.switchWizardPanel = function(panel) {
-        mod.dom.buttonToggleIdp.innerHTML=TYPO3.lang.be_js_txt_show_idp;
-        mod.dom.buttonToggleSp.innerHTML=TYPO3.lang.be_js_txt_show_sp;
+        mod.dom.buttonToggleIdp.innerText=TYPO3.lang.be_js_txt_show_idp;
+        mod.dom.buttonToggleSp.innerText=TYPO3.lang.be_js_txt_show_sp;
         Array.from(mod.dom.wizard.getElementsByClassName('step')).forEach(el => {
             el.classList.remove('active')
             el.classList.add('disabled')
@@ -151,7 +151,7 @@ define([
 
     // toggle the wizard help div
     mod.toggleHelp = function() {
-        const panelHelp = document.getElementById('eidlogin-settings-wizard-panel-help'); 
+        const panelHelp = document.getElementById('eidlogin-settings-wizard-panel-help');
         if (panelHelp.classList.contains('hidden')) {
             panelHelp.classList.remove('hidden');
             mod.dom.buttonHelp.classList.add('active');
@@ -170,7 +170,7 @@ define([
         }
         mod.switchWizardPanel(e.target.dataset.panel);
     }
-    
+
     // an improved debounce function from http://modernjavascript.blogspot.com/2013/08/building-better-debounce.html
     mod.debounce = function(func, wait) {
         var timeout, args, context, timestamp;
@@ -254,13 +254,13 @@ define([
         const panelIdpSettings = document.getElementById('eidlogin-settings-wizard-panel-idp_settings');
         if (panelIdpSettings.classList.contains('hidden')) {
             panelIdpSettings.classList.remove('hidden');
-            mod.dom.buttonToggleIdp.innerHTML=TYPO3.lang.be_js_txt_hide_idp;
+            mod.dom.buttonToggleIdp.innerText=TYPO3.lang.be_js_txt_hide_idp;
         } else {
             panelIdpSettings.classList.add('hidden');
-            mod.dom.buttonToggleIdp.innerHTML=TYPO3.lang.be_js_txt_show_idp;
+            mod.dom.buttonToggleIdp.innerText=TYPO3.lang.be_js_txt_show_idp;
         }
     }
-    
+
     // save the settings with a post of the form to SettingsController
     mod.saveSettings = function(e) {
         // maybe we need to switch panel
@@ -292,7 +292,7 @@ define([
                         }
                         mod.switchWizardPanel(3);
                         // display the sp_entity_id
-                        document.getElementById('eidlogin-settings-wizard-display-sp_entity_id').innerHTML=document.getElementById('eidlogin-settings-form-wizard-sp_entity_id').value;
+                        document.getElementById('eidlogin-settings-wizard-display-sp_entity_id').innerText=document.getElementById('eidlogin-settings-form-wizard-sp_entity_id').value;
                     }
                     // decide about the sp_acs_url
                     var acsUrl = mod.dom.dataSrc.dataset.url_acs_post;
@@ -301,7 +301,7 @@ define([
                      ) {
                         acsUrl = mod.dom.dataSrc.dataset.url_acs_redirect;
                     }
-                    document.getElementById('eidlogin-settings-wizard-display-sp_acs_url').innerHTML=acsUrl;
+                    document.getElementById('eidlogin-settings-wizard-display-sp_acs_url').innerText=acsUrl;
                     document.getElementById('eidlogin-settings-form-manual-sp_acs_url').value=acsUrl;
                 } else {
                     data.errors.forEach(error => {
@@ -332,7 +332,7 @@ define([
                 if(e2.target.status == 200) {
                     var spMetadata = e2.target.responseText;
                     var spMetadataPre = document.getElementById('eidlogin-settings-wizard-panel-register-sp-metadata');
-                    spMetadataPre.innerHTML = "";
+                    spMetadataPre.innerText = "";
                     spMetadataPre.appendChild(document.createTextNode(spMetadata));
                 } else {
                     Notification.error(errMsg);
@@ -343,10 +343,10 @@ define([
             });
             xhr.open('GET', url, true);
             xhr.send();
-            mod.dom.buttonToggleSp.innerHTML=TYPO3.lang.be_js_txt_hide_sp;
+            mod.dom.buttonToggleSp.innerText=TYPO3.lang.be_js_txt_hide_sp;
             spPanel.classList.remove('hidden');
         } else {
-            mod.dom.buttonToggleSp.innerHTML=TYPO3.lang.be_js_txt_show_sp;
+            mod.dom.buttonToggleSp.innerText=TYPO3.lang.be_js_txt_show_sp;
             spPanel.classList.add('hidden');
         }
     }
@@ -538,8 +538,8 @@ define([
                             async function (response) {
                                 const data = await response.resolve();
                                 if (data.status=="success") {
-                                    mod.dom.certNewDiv.innerHTML = '... '+data.cert_new;
-                                    mod.dom.certNewEncDiv.innerHTML = '... '+data.cert_new_enc;
+                                    mod.dom.certNewDiv.innerText = '... '+data.cert_new;
+                                    mod.dom.certNewEncDiv.innerText = '... '+data.cert_new_enc;
                                     mod.dom.buttonRolloverExec.disabled = false;
                                     mod.dom.spanRolloverExec.classList.add('hidden');
                                     Notification.success(data.message);
@@ -586,10 +586,10 @@ define([
                             async function (response) {
                                 const data = await response.resolve();
                                 if (data.status=="success") {
-                                    mod.dom.certActDiv.innerHTML = '... '+data.cert_act;
-                                    mod.dom.certActEncDiv.innerHTML = '... '+data.cert_act_enc;
-                                    mod.dom.certNewDiv.innerHTML = TYPO3.lang.be_js_txt_nocert;
-                                    mod.dom.certNewEncDiv.innerHTML = TYPO3.lang.be_js_txt_nocert;
+                                    mod.dom.certActDiv.innerText = '... '+data.cert_act;
+                                    mod.dom.certActEncDiv.innerText = '... '+data.cert_act_enc;
+                                    mod.dom.certNewDiv.innerText = TYPO3.lang.be_js_txt_nocert;
+                                    mod.dom.certNewEncDiv.innerText = TYPO3.lang.be_js_txt_nocert;
                                     mod.dom.buttonRolloverExec.disabled = true;
                                     mod.dom.spanRolloverExec.classList.remove('hidden');
                                     Notification.success(data.message);
@@ -611,4 +611,4 @@ define([
     // To let the module be a dependency of another module, we return our object
 return mod;
 });
- 
+
