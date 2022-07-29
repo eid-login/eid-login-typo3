@@ -18,9 +18,9 @@ PLEASE NOTE: If the extension has been installed via composer, you might need to
 # Requirements
 The eID-Login extension has some requirements to the TYPO3 instance and the configured sites.
 * The extension depends on the presence of the TYPO3 scheduler. In composer based TYPO3 instances you might need to install it [separately](https://packagist.org/packages/typo3/cms-scheduler).
-* The mail configuration of the TYPO3 instance must be valid, including a default 'from' adress.
-* All sites using the eID-Login must use HTTP over TLS as protocoll.
-* The 'Site Configuration' settings of sites using the eID-Login must have full qualified entry points, i.e not using `/` but `https://domain.tld/`.  
+* The mail configuration of the TYPO3 instance must be valid, including a default 'from' address.
+* All sites using the eID-Login must use HTTP over TLS as protocol.
+* The 'Site Configuration' settings of sites using the eID-Login must have full qualified entry points, i.e not using `/` but `https://domain.tld/`.
 
 # Setup and Usage
 ## Schedule commands of the eID-Login extension
@@ -39,7 +39,7 @@ The commands must be scheduled as tasks in the scheduler extension:
 
 ## Usage of eID-Login in a site
 The eID-Login extension can be configured and used in the sites of a TYPO3 instance separately.
-Opening the backend module of the extension will show a matrix of the sites in the TYPO3 instance and its setup and 
+Opening the backend module of the extension will show a matrix of the sites in the TYPO3 instance and its setup and
 configuration state regarding the eID-Login.
 ### Use the 'eID-Login' SAML-Template on a page for technical URLs
 To provide URLs needed for the eID-Login, a site most hold a  free accessible page without content, which should not be visible in the menus. This page needs a separate template record with the following configuration:
