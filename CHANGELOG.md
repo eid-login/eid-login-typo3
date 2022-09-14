@@ -6,6 +6,12 @@
 ### Fixed
 ### Security
 
+## 1.2.3 2022-09-14
+### Changed
+- Update dependencies
+- Replace innerHTML with innerText
+- Fix deprecated required parameter follows optional parameter
+
 ## 1.2.2 2021-12-17
 ### Added
 - Usage of function GeneralUtility::_POST and GeneralUtility::_GET (thanks to ayacoo)
