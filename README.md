@@ -1,4 +1,11 @@
 # eID-Login extension for TYPO3
+
+# Deprecation warning
+
+This repository is no longer actively maintained. You can use it at your own risk, but support and changes are no longer provided.
+
+# Description
+
 This is the eID-Login extension for the [TYPO3](https://typo3.org) platform.
 It has been developed by [ecsec](https://ecsec.de) on behalf of the [German Federal Office for Information Security](https://www.bsi.bund.de/).
 
